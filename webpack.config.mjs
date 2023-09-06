@@ -3,6 +3,10 @@ import webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
+const htmlMetaTags = Object.freeze({
+
+});
+
 export default function(env, argv) {
     return {
         entry: [resolvePath('.', 'src', 'main', 'ts', 'index.ts'), resolvePath('.', 'src', 'main', 'scss', 'index.scss')],
@@ -42,7 +46,8 @@ export default function(env, argv) {
         plugins: [
             new MiniCssExtractPlugin({ filename: "index.min.css" }),
             new HtmlWebpackPlugin({
-                template: resolvePath('.', 'src', 'main', 'html', 'index.html')
+                template: resolvePath('.', 'src', 'main', 'html', 'index.html'),
+                scriptLoading: 'module'
             }),
             new webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery" })
         ]
