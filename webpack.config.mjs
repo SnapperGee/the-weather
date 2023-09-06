@@ -34,6 +34,9 @@ export default function(env, argv) {
             static: {
                 directory: resolvePath('.', 'build')
             },
+            client: {
+                overlay: false
+            },
             compress: true,
             port: 9908
         },
