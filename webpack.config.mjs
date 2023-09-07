@@ -27,10 +27,6 @@ export default function(env, argv) {
                 {
                     test: /\.s[a|c]ss$/,
                     use: [env.production ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader', 'sass-loader']
-                },
-                {
-                    test: /\.json$/,
-                    type: 'json'
                 }
             ],
         },
