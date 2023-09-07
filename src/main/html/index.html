@@ -17,9 +17,13 @@
     <main class="container-fluid">
         <div class="row" id="rootRow">
 
-            <aside class="col-2 text-center" id="citySearchColumn">
-                <label class="fw-bold fs-4" for="searchCityInput">Search for a City:</label>
-                <input class="d-block w-100" id="searchCityInput" type="text" name="searchCityInput">
+            <aside class="col-2 text-center" id="searchCityColumn">
+                <form>
+                    <label class="form-label fw-bold fs-4" for="searchCityInput">Search for a City:</label>
+                    <input class="form-control mb-3 w-100" id="searchCityInput" type="text" name="searchCityInput" placeholder="city name" pattern=".*\S{1,}.*" title="Non empty/blank" required />
+                    <button type="submit" class="btn btn-primary w-100" id="searchCittybutton">Search</button>
+                </form>
+                <hr>
             </aside>
 
             <div class="col-10" id="weatherInfoColumn">
