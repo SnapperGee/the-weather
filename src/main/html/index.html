@@ -7,9 +7,35 @@
     <title>The Weather</title>
     <!-- Dummy script tag to address Firefox bug where unstyled content is flashed on page load -->
     <script>const FOO = undefined;</script>
-    <!-- JavaScript source inserted as deferred script via webpack build -->
 </head>
-    <body>
-        <!-- Body generated via JavaScript -->
-    </body>
+<body>
+
+    <header class="d-flex align-items-center justify-content-center">
+        <h1 class="text-white fw-bold">The Weather</h1>
+    </header>
+
+    <main class="container-fluid">
+        <div class="row" id="rootRow">
+
+            <aside class="col-2 text-center" id="citySearchColumn">
+                <label class="fw-bold fs-4" for="searchCityInput">Search for a City:</label>
+                <input class="d-block w-100" id="searchCityInput" type="text" name="searchCityInput">
+            </aside>
+
+            <div class="col-10" id="weatherInfoColumn">
+
+                <section class="col-12" id="weatherDayColumn">
+
+                </section>
+
+                <section class="col-12" id="weatherForeCastColumn">
+
+                </section>
+
+            </div>
+
+        </div>
+    </main>
+
+</body>
 </html>
