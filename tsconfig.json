@@ -11,7 +11,8 @@
       "moduleResolution": "node",
       "noEmitOnError": true,
       "noImplicitOverride": true,
-      "rootDir": "./src/main/ts",
+      "resolveJsonModule": true,
+      "rootDir": "./src/main",
       "sourceMap": true,
       "strict": true,
       "target": "es2021"
