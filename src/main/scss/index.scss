@@ -1,4 +1,7 @@
-@use "../../../node_modules/bootstrap/scss/bootstrap";
+$primary: #6991E3;
+$secondary: #AEAEAE;
+
+@import "../../../node_modules/bootstrap/scss/bootstrap";
 
 $headerHeight: 100px;
 
@@ -7,9 +10,10 @@ html, body {
     width: 100%;
 }
 
+
 header {
     height: $headerHeight;
-    background-image: linear-gradient(to right, #465AB8, #261360);
+    background-image: linear-gradient(to right, $primary, #261360);
 }
 
 header h1 {

@@ -10,6 +10,20 @@
 </head>
 <body>
 
+     <!-- noscript alert -->
+     <noscript>
+        <div class="container-fluid alert alert-danger">
+            <div class="row align-items-center justify-content-around">
+                <div class="col-1">
+                    <img src="./resources/img/exclamation-triangle.svg" role="img" alt="exclamation triangle" height="130px" width="130px"/>
+                </div>
+                <div class="col-8">
+                    <p class="fs-1 lh-lg">JavaScript is either disabled or not functioning correctly.</p>
+                </div>
+            </div>
+        </div>
+    </noscript>
+
     <header class="d-flex align-items-center justify-content-center">
         <h1 class="text-white fw-bold">The Weather</h1>
     </header>
@@ -20,10 +34,16 @@
             <aside class="col-md-3" id="searchCityColumn">
                 <form>
                     <label class="form-label fw-bold fs-4" for="searchCityInput">Search for a City:</label>
-                    <input class="form-control mb-3 w-100" id="searchCityInput" type="text" name="searchCityInput" placeholder="city name" pattern=".*\S{1,}.*" title="Non empty/blank" required />
-                    <button type="submit" class="btn btn-primary w-100" id="searchCittybutton">Search</button>
+                    <input class="form-control mb-3 w-100" id="searchCityInput" type="text" name="searchCityInput" placeholder="city name" pattern=".*\S+.*" title="city name" required />
+                    <button type="submit" class="btn btn-primary text-white w-100" id="searchCityButton">Search</button>
                 </form>
                 <hr>
+                <ul class="list-group list-unstyled text-center gap-3" id="citySearchHistory">
+                    <li><button class="btn btn-secondary list-group-item-action w-100" type="button">A btn</button></li>
+                    <li><button class="btn btn-secondary list-group-item-action w-100" type="button">A btn</button></li>
+                    <li><button class="btn btn-secondary list-group-item-action w-100" type="button">A btn</button></li>
+                    <li><button class="btn btn-secondary list-group-item-action w-100" type="button">A btn</button></li>
+                </ul>
             </aside>
 
             <div class="col-md-9" id="weatherInfoColumn">
