@@ -1,6 +1,6 @@
 @use "../../../node_modules/bootstrap/scss/bootstrap";
 
-$header-height: 100px;
+$headerHeight: 100px;
 
 html, body {
     height: 100%;
@@ -8,7 +8,7 @@ html, body {
 }
 
 header {
-    height: $header-height;
+    height: $headerHeight;
     background-image: linear-gradient(to right, #465AB8, #261360);
 }
 
@@ -18,6 +18,6 @@ header h1 {
 }
 
 main {
-    height: calc(100% - $header-height);
+    height: calc(100% - $headerHeight);
     background-color: darkorange;
 }
