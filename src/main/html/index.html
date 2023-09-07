@@ -14,10 +14,10 @@
         <h1 class="text-white fw-bold">The Weather</h1>
     </header>
 
-    <main class="container-fluid">
+    <main class="container">
         <div class="row" id="rootRow">
 
-            <aside class="col-2 text-center" id="searchCityColumn">
+            <aside class="col-md-3 text-center" id="searchCityColumn">
                 <form>
                     <label class="form-label fw-bold fs-4" for="searchCityInput">Search for a City:</label>
                     <input class="form-control mb-3 w-100" id="searchCityInput" type="text" name="searchCityInput" placeholder="city name" pattern=".*\S{1,}.*" title="Non empty/blank" required />
@@ -26,13 +26,13 @@
                 <hr>
             </aside>
 
-            <div class="col-10" id="weatherInfoColumn">
+            <div class="col-md-9" id="weatherInfoColumn">
 
-                <section class="col-12" id="weatherDayColumn">
+                <section class="col-md-12" id="weatherDayColumn">
 
                 </section>
 
-                <section class="col-12" id="weatherForeCastColumn">
+                <section class="col-md-12" id="weatherForecastColumn">
 
                 </section>
 
