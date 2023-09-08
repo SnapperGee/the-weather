@@ -7,6 +7,10 @@ export class WeatherDayCard
     readonly #htmlSectionElement: HTMLElement;
     #cityName: string;
     #date: string;
+    #icon: Icon;
+    #temp: number;
+    #windSpeed: number;
+    #humidity: number;
 
     readonly #cityNameAndDateTitle: HTMLHeadingElement;
     readonly #weatherConditionImg: HTMLImageElement;
@@ -60,6 +64,10 @@ export class WeatherDayCard
         this.#htmlSectionElement = htmlSectionElement;
         this.#cityName = cityName;
         this.#date = date;
+        this.#icon = typeof icon === "string" ? {src: icon, alt: DEFAULT_ICON_ALT} : icon;
+        this.#temp = temp;
+        this.#windSpeed = windSpeed;
+        this.#humidity = humidity;
 
         this.#cityNameAndDateTitle = this.#htmlSectionElement.querySelector("h2")!;
         this.#weatherConditionImg = this.#htmlSectionElement.querySelector("img")!;
@@ -72,12 +80,12 @@ export class WeatherDayCard
 
         this.#cityNameAndDateTitle.textContent = `${this.#cityName} (${this.#date})`;
 
-        this.#weatherConditionImg.src = typeof icon === "string" ? icon : icon.src;
-        this.#weatherConditionImg.alt = typeof icon === "string" ? DEFAULT_ICON_ALT : icon.alt;
+        this.#weatherConditionImg.src = this.#icon.src;
+        this.#weatherConditionImg.alt = this.#icon.alt;
 
-        this.#tempParagraph.textContent = `Temp: ${temp} °F`;
-        this.#windParagraph.textContent = `Wind: ${windSpeed} MPH`;
-        this.#humidityParagraph.textContent = `Humidity: ${humidity} %`;
+        this.#tempParagraph.textContent = `Temp: ${this.#temp} °F`;
+        this.#windParagraph.textContent = `Wind: ${this.#windSpeed} MPH`;
+        this.#humidityParagraph.textContent = `Humidity: ${this.#humidity} %`;
     }
 
     public cityName(cityName: string): WeatherDayCard
@@ -96,26 +104,30 @@ export class WeatherDayCard
 
     public icon(icon: string | Icon): WeatherDayCard
     {
-        this.#weatherConditionImg.src = typeof icon === "string" ? icon : icon.src;
-        this.#weatherConditionImg.alt = typeof icon === "string" ? DEFAULT_ICON_ALT : icon.alt;
+        this.#icon = typeof icon === "string" ? {src: icon, alt: DEFAULT_ICON_ALT} : icon;
+        this.#weatherConditionImg.src = this.#icon.src;
+        this.#weatherConditionImg.alt = this.#icon.alt;
         return this;
     }
 
     public temp(temp: number): WeatherDayCard
     {
-        this.#tempParagraph.textContent = `Temp: ${temp} °F`;
+        this.#temp = temp;
+        this.#tempParagraph.textContent = `Temp: ${this.#temp} °F`;
         return this;
     }
 
     public wind(windSpeed: number): WeatherDayCard
     {
-        this.#windParagraph.textContent = `Wind: ${windSpeed} MPH`;
+        this.#windSpeed = windSpeed;
+        this.#windParagraph.textContent = `Wind: ${this.#windSpeed} MPH`;
         return this;
     }
 
     public humidity(humidity: number): WeatherDayCard
     {
-        this.#humidityParagraph.textContent = `Humidity: ${humidity} %`;
+        this.#humidity = humidity;
+        this.#humidityParagraph.textContent = `Humidity: ${this.#humidity} %`;
         return this;
     }
 
