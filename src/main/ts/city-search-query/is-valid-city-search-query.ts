@@ -1,10 +1,13 @@
-const isNotBlank: RegExp = /\S+/;
-const commaSurroundedByNonBlank =  /\S+.*,.*\S+/;
+const isNotBlankRegex: RegExp = /\S+/;
+const commaSurroundedByNonBlank: RegExp = /\S+.*,.*\S+/;
 
-const isValidCitySearchQuery = (aString: string): boolean =>
+export const isNotBlank = (aString: string): boolean => isNotBlankRegex.test(aString);
+export const isBlank = (aString: string): boolean => ! isNotBlankRegex.test(aString);
+
+export const isValidCitySearchQuery = (aString: string): boolean =>
 {
     // empty/blank string is invalid
-    if ( ! isNotBlank.test(aString))
+    if (isBlank(aString))
     {
         return false;
     }
