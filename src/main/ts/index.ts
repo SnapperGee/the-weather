@@ -14,7 +14,7 @@ searchCityHistoryUlElement?.appendChild(searchHistoryLiButton);
 const weatherDayCard: WeatherDayCard = createWeatherDayCard(
     document.getElementById("weatherDayCard"),
     "San Francisco",
-    "02/27/1992",
+    "12/25/2023",
     "",
     11,
     10,
