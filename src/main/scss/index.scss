@@ -1,5 +1,6 @@
 $primary: #6991E3;
 $secondary: #AEAEAE;
+$dark: #323D4F;
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 
@@ -23,5 +24,4 @@ header h1 {
 
 main {
     height: calc(100% - $headerHeight);
-    background-color: darkorange;
 }
