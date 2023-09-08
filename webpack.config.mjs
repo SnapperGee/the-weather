@@ -2,6 +2,7 @@ import { resolve as resolvePath } from "node:path";
 import webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import autoprefixer from "autoprefixer"
 
 const htmlMetaTags = Object.freeze({
 
@@ -26,7 +27,20 @@ export default function(env, argv) {
                 },
                 {
                     test: /\.s[a|c]ss$/,
-                    use: [env.production ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader', 'sass-loader']
+                    use: [
+                        { loader: env.production ? MiniCssExtractPlugin.loader : 'style-loader' },
+                        { loader: 'css-loader'},
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                postcssOptions: {
+                                    plugins: [
+                                        autoprefixer
+                                    ]
+                                }
+                            }
+                        },
+                        {loader: 'sass-loader' }]
                 }
             ],
         },
@@ -38,7 +52,8 @@ export default function(env, argv) {
                 overlay: false
             },
             compress: true,
-            port: 9908
+            port: 9908,
+            hot: true
         },
         resolve: { extensions: ['.tsx', '.ts', '.js'], },
         output: {
