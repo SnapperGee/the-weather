@@ -28,8 +28,8 @@ export default function(env, argv) {
                 {
                     test: /\.s[a|c]ss$/,
                     use: [
-                        { loader: env.production ? MiniCssExtractPlugin.loader : 'style-loader' },
-                        { loader: 'css-loader'},
+                        env.production ? MiniCssExtractPlugin.loader : 'style-loader',
+                        'css-loader',
                         {
                             loader: 'postcss-loader',
                             options: {
@@ -40,7 +40,8 @@ export default function(env, argv) {
                                 }
                             }
                         },
-                        {loader: 'sass-loader' }]
+                        'sass-loader'
+                    ]
                 }
             ],
         },
