@@ -24,86 +24,93 @@
         </div>
     </noscript>
 
-    <header class="d-flex align-items-center justify-content-center">
+    <header class="d-flex align-items-center justify-content-center mb-3">
         <h1 class="text-white fw-bold">The Weather</h1>
     </header>
 
     <main class="container">
         <div class="row" id="rootRow">
 
+            <!-- City search form and search history column -->
             <aside class="col-md-3" id="searchCityColumn">
+                <!-- form for submitting -->
                 <form>
                     <label class="form-label fw-bold fs-4" for="searchCityInput">Search for a City:</label>
-                    <input class="form-control mb-3 w-100" id="searchCityInput" type="text" name="searchCityInput" placeholder="city name" pattern=".*\S+.*" title="city name" required />
+                    <input class="form-control mb-3 w-100" id="searchCityInput" type="text" name="searchCityInput" placeholder="San Francisco, US" title="city name, (optional) country" required />
                     <button type="submit" class="btn btn-primary text-white w-100" id="searchCityButton">Search</button>
                 </form>
                 <hr>
-                <ul class="list-group list-unstyled text-center gap-3" id="citySearchHistory">
-                    <li><button class="btn btn-secondary list-group-item-action w-100" type="button">A btn</button></li>
-                    <li><button class="btn btn-secondary list-group-item-action w-100" type="button">A btn</button></li>
-                    <li><button class="btn btn-secondary list-group-item-action w-100" type="button">A btn</button></li>
-                    <li><button class="btn btn-secondary list-group-item-action w-100" type="button">A btn</button></li>
-                </ul>
+                <!-- List of city search history buttons that can be clicked to search again -->
+                <ul class="list-group list-unstyled text-center gap-3" id="citySearchHistoryList"></ul>
             </aside>
 
-            <div class="col-md-9" id="weatherInfoColumn">
+            <!-- Day weather and 5 day forecast columns/rows -->
+            <div class="col-md-9 mt-2" id="weatherInfoColumn">
 
+                <!-- Day weather column -->
                 <div class="col-md-12" id="weatherDayColumn">
+
+                    <!-- Day Weather row -->
                     <div class="row">
+                        <!-- Day weather card -->
                         <section class="card" id="weatherDayCard">
-                            <p class="card-title fs-2 text-nowrap">City Name (current date) icon</p>
-                            <p class="card-text text-nowrap">Temp: fahrenheit</p>
-                            <p class="card-text text-nowrap">Wind: mph</p>
-                            <p class="card-text text-nowrap">Humidity: %</p>
+                            <h2 class="card-title fw-bold">City Name (current date) icon</h2>
+                            <p class="card-text">Temp: fahrenheit</p>
+                            <p class="card-text">Wind: mph</p>
+                            <p class="card-text">Humidity: %</p>
                         </section>
                     </div>
                 </div>
 
+                <!-- 5 day forecast header and cards column -->
                 <div class="col-md-12 pt-2" id="weatherForecastColumn">
 
+                    <!-- 5 day forecast header and columns row -->
                     <div class="row justify-content-between" id="weatherForecastRow">
 
-                        <p class="col-md-12 fs-4 fw-bold">5-Day Forecast:</p>
+                        <!-- 5 day forecast header -->
+                        <h4 class="col-md-12 fw-bold" id="fiveDayForecastHeader">5-Day Forecast:</h4>
 
-                        <section class="card col-md-2 bg-dark text-white" class="weatherForecastCard" id="firstWeatherForecastCard">
-                            <p class="card-title fs-4 text-nowrap">current date</p>
+                        <section class="card col-md-2 bg-dark text-white pb-3" class="weatherForecastCard" id="firstWeatherForecastCard">
+                            <h4 class="card-title fw-bold text-nowrap">current date</h4>
                             <p class="card-text text-nowrap">icon</p>
                             <p class="card-text text-nowrap">Temp: fahrenheit</p>
                             <p class="card-text text-nowrap">Wind: mph</p>
                             <p class="card-text text-nowrap">Humidity: %</p>
                         </section>
 
-                        <section class="card col-md-2 bg-dark text-white" class="weatherForecastCard" id="secondWeatherForecastCard">
-                            <p class="card-title fs-4 text-nowrap">current date</p>
+                        <section class="card col-md-2 bg-dark text-white pb-3" class="weatherForecastCard" id="secondWeatherForecastCard">
+                            <h4 class="card-title fw-bold text-nowrap">current date</h4>
                             <p class="card-text text-nowrap">icon</p>
                             <p class="card-text text-nowrap">Temp: fahrenheit</p>
                             <p class="card-text text-nowrap">Wind: mph</p>
                             <p class="card-text text-nowrap">Humidity: %</p>
                         </section>
 
-                        <section class="card col-md-2 bg-dark text-white" class="weatherForecastCard" id="thirdWeatherForecastCard">
-                            <p class="card-title fs-4 text-nowrap">current date</p>
+                        <section class="card col-md-2 bg-dark text-white pb-3" class="weatherForecastCard" id="thirdWeatherForecastCard">
+                            <h4 class="card-title fw-bold text-nowrap">current date</h4>
                             <p class="card-text text-nowrap">icon</p>
                             <p class="card-text text-nowrap">Temp: fahrenheit</p>
                             <p class="card-text text-nowrap">Wind: mph</p>
                             <p class="card-text text-nowrap">Humidity: %</p>
                         </section>
 
-                        <section class="card col-md-2 bg-dark text-white" class="weatherForecastCard" id="fourthWeatherForecastCard">
-                            <p class="card-title fs-4 text-nowrap">current date</p>
+                        <section class="card col-md-2 bg-dark text-white pb-3" class="weatherForecastCard" id="fourthWeatherForecastCard">
+                            <h4 class="card-title fw-bold text-nowrap">current date</h4>
                             <p class="card-text text-nowrap">icon</p>
                             <p class="card-text text-nowrap">Temp: fahrenheit</p>
                             <p class="card-text text-nowrap">Wind: mph</p>
                             <p class="card-text text-nowrap">Humidity: %</p>
                         </section>
 
-                        <section class="card col-md-2 bg-dark text-white" class="weatherForecastCard" id="fifthWeatherForecastCard">
-                            <p class="card-title fs-4 text-nowrap">current date</p>
+                        <section class="card col-md-2 bg-dark text-white pb-3" class="weatherForecastCard" id="fifthWeatherForecastCard">
+                            <h4 class="card-title fw-bold text-nowrap">current date</h4>
                             <p class="card-text text-nowrap">icon</p>
                             <p class="card-text text-nowrap">Temp: fahrenheit</p>
                             <p class="card-text text-nowrap">Wind: mph</p>
                             <p class="card-text text-nowrap">Humidity: %</p>
                         </section>
+
                     </div>
 
                 </div>
