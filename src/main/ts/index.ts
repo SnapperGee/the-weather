@@ -1,10 +1,15 @@
 import { SearchCityButton } from "./search-city-button";
-import cityListJson from "../resources/current.city.list.json";
+import "./city-list";
+import createSearchHistoryLIButton from "./create-search-history-li-button"
 
-const searchCityTextInput = document.getElementById("searchCityInput");
+const searchCityHtmlTextInput = document.getElementById("searchCityInput");
 const searchCityHtmlButton = document.getElementById("searchCityButton");
-const searchCityHistoryUlElement = document.getElementById("citySearchHistory");
+const searchCityHistoryUlElement = document.getElementById("citySearchHistoryList");
 
-const searchCityButton = new SearchCityButton(<HTMLButtonElement> searchCityHtmlButton, <HTMLInputElement> searchCityTextInput, <HTMLUListElement> searchCityHistoryUlElement);
+const searchHistoryLiButton = createSearchHistoryLIButton("Blep");
 
-console.log(cityListJson);
+searchCityHistoryUlElement?.appendChild(searchHistoryLiButton);
+
+const weatherDayCard = document.getElementById("weatherDayCard");
+
+const searchCityButton = new SearchCityButton(<HTMLButtonElement> searchCityHtmlButton, <HTMLInputElement> searchCityHtmlTextInput, <HTMLUListElement> searchCityHistoryUlElement);
