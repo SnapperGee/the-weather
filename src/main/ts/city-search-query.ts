@@ -1,6 +1,7 @@
 const isNotBlankRegex: RegExp = /\S+/;
 const commaSurroundedByNonBlank: RegExp = /\S+.*,.*\S+/;
 const twoOrMoreWhiteSpaces = /\s{2,}/g;
+const commaFollowedBy2AdjacentNonWhitespaceChars = /^,\s*\S{2}\s*$/;
 
 export const isNotBlank = (aString: string): boolean => isNotBlankRegex.test(aString);
 export const isBlank = (aString: string): boolean => ! isNotBlankRegex.test(aString);
@@ -29,6 +30,12 @@ export const isValidCitySearchQuery = (aString: string): boolean =>
 
         // make sure string has at least 1 non-whitespace character on each side of comma
         if ( ! commaSurroundedByNonBlank.test(aString))
+        {
+            return false;
+        }
+
+        // Make sure that there's only 2 adjacent non whitespace characters after comma
+        if ( ! commaFollowedBy2AdjacentNonWhitespaceChars.test(aString.substring(aString.indexOf(","))))
         {
             return false;
         }
