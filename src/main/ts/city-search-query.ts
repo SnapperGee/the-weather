@@ -1,5 +1,6 @@
 const isNotBlankRegex: RegExp = /\S+/;
 const commaSurroundedByNonBlank: RegExp = /\S+.*,.*\S+/;
+const twoOrMoreWhiteSpaces = /\s{2,}/g;
 
 export const isNotBlank = (aString: string): boolean => isNotBlankRegex.test(aString);
 export const isBlank = (aString: string): boolean => ! isNotBlankRegex.test(aString);
@@ -34,4 +35,18 @@ export const isValidCitySearchQuery = (aString: string): boolean =>
     }
 
     return true;
+}
+
+export function formatCitySearchQuery(aString: string): string;
+export function formatCitySearchQuery(strings: string[]): string[];
+export function formatCitySearchQuery(aStringOrStrings: string | string[]): string | string[]
+{
+    if (aStringOrStrings instanceof Array)
+    {
+        return aStringOrStrings.filter(str => isNotBlank(str)).map(str => str.trim().replaceAll(twoOrMoreWhiteSpaces, "\u0020"));
+    }
+    else
+    {
+        return aStringOrStrings.trim().replaceAll(twoOrMoreWhiteSpaces, "\u0020");
+    }
 }
