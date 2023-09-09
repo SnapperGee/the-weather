@@ -4,13 +4,13 @@ type city = Readonly<{id: number, name: string, country: string}>;
 
 const cities: readonly city[] = Object.freeze(citiesJson) as readonly city[];
 
-export function getCity(id: number): city | undefined;
+export function getCity(id: number): city | false;
 export function getCity(name: string, country: string): city[];
-export function getCity(idOrName: number | string, country?: string): city | undefined | city[]
+export function getCity(idOrName: number | string, country?: string): city | false | city[]
 {
     if (typeof idOrName === "number")
     {
-        return cities.find(city => idOrName === city.id);
+        return cities.find(city => idOrName === city.id) ?? false;
     }
     else if (typeof idOrName === "string")
     {
