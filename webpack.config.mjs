@@ -67,8 +67,7 @@ export default function(env, argv) {
             new HtmlWebpackPlugin({
                 template: resolvePath('.', 'src', 'main', 'html', 'index.html'),
                 scriptLoading: 'module'
-            }),
-            new webpack.ProvidePlugin({ $: "jquery", jQuery: "jquery" })
+            })
         ]
     }
 };
