@@ -1,6 +1,4 @@
-const DEFAULT_ICON_ALT: string = "weather condition icon";
-
-type Icon = {src: string, alt: string};
+import { DEFAULT_ICON_ALT, type Icon } from "./util";
 
 export class WeatherDayCard
 {
