@@ -56,7 +56,6 @@ export default function(env, argv) {
             port: 9908,
             hot: true
         },
-        resolve: { extensions: ['.tsx', '.ts', '.js'], },
         output: {
             filename: env.production ? 'index.bundle.min.mjs' : 'index.bundle.mjs',
             path: resolvePath('.', 'build'),
