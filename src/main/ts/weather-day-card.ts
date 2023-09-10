@@ -142,7 +142,7 @@ export class WeatherDayCard
     }
 }
 
-export function weatherDayCard( htmlSectionElement: HTMLElement | null,
+export function weatherDayCard( htmlElement: HTMLElement | null,
                                 cityName: string,
                                 date: string,
                                 icon: string | Icon,
@@ -150,12 +150,12 @@ export function weatherDayCard( htmlSectionElement: HTMLElement | null,
                                 windSpeed: number,
                                 humidity: number ): WeatherDayCard
 {
-    if (htmlSectionElement === undefined || htmlSectionElement === null)
+    if (htmlElement === undefined || htmlElement === null)
     {
-        throw new TypeError(`${arguments.callee.name}: ${htmlSectionElement} HTML section element.`);
+        throw new TypeError(`${arguments.callee.name}: ${htmlElement} HTML element.`);
     }
 
-    return new WeatherDayCard(htmlSectionElement, cityName, date, icon, temp, windSpeed, humidity);
+    return new WeatherDayCard(htmlElement, cityName, date, icon, temp, windSpeed, humidity);
 }
 
 export default weatherDayCard;
