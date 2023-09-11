@@ -17,7 +17,7 @@ const weatherDayCard: WeatherDayCard = createWeatherDayCard(
     67,
     2.22,
     10
-).show();
+);
 
 const weatherForecastCard1: WeatherForecastCard = weatherForecastCard(
     weatherForecastCards.item(0),
