@@ -86,44 +86,73 @@ export class WeatherDayCard
         this.#humidityParagraph.textContent = `Humidity: ${this.#humidity} %`;
     }
 
-    public cityName(cityName: string): WeatherDayCard
+    public cityName(cityName: NonNullable<string>): WeatherDayCard
     {
+        if (cityName === undefined || cityName === null)
+        {
+            throw new TypeError(`${this.cityName.name}: ${cityName} city name string.`);
+        }
+
         this.#cityName = cityName;
         this.#cityNameAndDateTitle.textContent = `${this.#cityName} (${this.#date})`;
         return this;
     }
 
-    public date(date: string): WeatherDayCard
+    public date(date: NonNullable<string>): WeatherDayCard
     {
+        if (date === undefined || date === null)
+        {
+            throw new TypeError(`${this.date.name}: ${date} date string.`);
+        }
+
         this.#date = date;
         this.#cityNameAndDateTitle.textContent = `${this.#cityName} (${this.#date})`;
         return this;
     }
 
-    public icon(icon: string | Icon): WeatherDayCard
+    public icon(icon: NonNullable<string | Icon>): WeatherDayCard
     {
+        if (icon === undefined || icon === null)
+        {
+            throw new TypeError(`${this.icon.name}: ${icon} icon string or object.`);
+        }
+
         this.#icon = typeof icon === "string" ? {src: icon, alt: DEFAULT_ICON_ALT} : icon;
         this.#weatherConditionImg.src = this.#icon.src;
         this.#weatherConditionImg.alt = this.#icon.alt;
         return this;
     }
 
-    public temp(temp: number): WeatherDayCard
+    public temp(temp: NonNullable<number>): WeatherDayCard
     {
+        if (temp === undefined || temp === null)
+        {
+            throw new TypeError(`${this.temp.name}: ${temp} number.`);
+        }
+
         this.#temp = temp;
         this.#tempParagraph.textContent = `Temp: ${this.#temp} °F`;
         return this;
     }
 
-    public wind(windSpeed: number): WeatherDayCard
+    public wind(windSpeed: NonNullable<number>): WeatherDayCard
     {
+        if (windSpeed === undefined || windSpeed === null)
+        {
+            throw new TypeError(`${this.wind.name}: ${windSpeed} wind speed number.`);
+        }
+
         this.#windSpeed = windSpeed;
         this.#windParagraph.textContent = `Wind: ${this.#windSpeed} MPH`;
         return this;
     }
 
-    public humidity(humidity: number): WeatherDayCard
+    public humidity(humidity: NonNullable<number>): WeatherDayCard
     {
+        if (humidity === undefined || humidity === null)
+        {
+            throw new TypeError(`${this.humidity.name}: ${humidity} humidity number.`);
+        }
         this.#humidity = humidity;
         this.#humidityParagraph.textContent = `Humidity: ${this.#humidity} %`;
         return this;
