@@ -152,7 +152,7 @@ export function weatherDayCard( htmlElement: HTMLElement | null,
 {
     if (htmlElement === undefined || htmlElement === null)
     {
-        throw new TypeError(`${arguments.callee.name}: ${htmlElement} HTML element.`);
+        throw new TypeError(`${weatherDayCard.name}: ${htmlElement} HTML element.`);
     }
 
     return new WeatherDayCard(htmlElement, cityName, date, icon, temp, windSpeed, humidity);
