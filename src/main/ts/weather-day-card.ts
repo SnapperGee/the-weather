@@ -135,11 +135,11 @@ export class WeatherDayCard
         return this;
     }
 
-    public wind(windSpeed: NonNullable<number>): WeatherDayCard
+    public windSpeed(windSpeed: NonNullable<number>): WeatherDayCard
     {
         if (windSpeed === undefined || windSpeed === null)
         {
-            throw new TypeError(`${this.wind.name}: ${windSpeed} wind speed number.`);
+            throw new TypeError(`${this.windSpeed.name}: ${windSpeed} wind speed number.`);
         }
 
         this.#windSpeed = windSpeed;
