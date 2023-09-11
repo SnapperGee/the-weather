@@ -4,10 +4,6 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import autoprefixer from "autoprefixer"
 
-const htmlMetaTags = Object.freeze({
-
-});
-
 export default function(env, argv) {
     return {
         entry: [resolvePath('.', 'src', 'main', 'ts', 'index.ts'), resolvePath('.', 'src', 'main', 'scss', 'index.scss')],
