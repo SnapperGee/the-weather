@@ -1,3 +1,5 @@
+import { City } from "./cities";
+
 export interface DailyWeather
 {
     dt: number,
@@ -18,5 +20,6 @@ export interface DailyWeather
 
 export interface WeatherAPIResponse
 {
+    city: City,
     list: readonly DailyWeather[]
 }

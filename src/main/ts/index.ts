@@ -1,13 +1,9 @@
-import { SearchButton } from "./search/search-button";
 import createSearchHistoryLIButton from "./search/create-search-history-li-button";
 import { type WeatherDayCard, weatherDayCard as createWeatherDayCard } from "./weather-day-card";
 import { type WeatherForecastCard, weatherForecastCard } from "./weather-forecast-card";
+import { searchSubmitEvent } from "./search/search-submit-event"
 
-const searchCityHtmlTextInput = document.getElementById("searchCityInput");
-const searchCityHtmlButton = document.getElementById("searchCityButton");
-const searchCityHistoryUlElement = document.getElementById("citySearchHistoryList");
-
-const weatherForecastCards = document.getElementsByClassName("weatherForecastColumn") as HTMLCollectionOf<HTMLElement>;
+const weatherForecastColumns = document.getElementsByClassName("weatherForecastColumn") as HTMLCollectionOf<HTMLElement>;
 
 const weatherDayCard: WeatherDayCard = createWeatherDayCard(
     document.getElementById("weatherDayCard"),
@@ -20,7 +16,7 @@ const weatherDayCard: WeatherDayCard = createWeatherDayCard(
 );
 
 const weatherForecastCard1: WeatherForecastCard = weatherForecastCard(
-    weatherForecastCards.item(0),
+    weatherForecastColumns.item(0),
     "12/26/2023",
     "",
     58,
@@ -29,7 +25,7 @@ const weatherForecastCard1: WeatherForecastCard = weatherForecastCard(
 );
 
 const weatherForecastCard2: WeatherForecastCard = weatherForecastCard(
-    weatherForecastCards.item(1),
+    weatherForecastColumns.item(1),
     "12/27/2023",
     "",
     63,
@@ -38,7 +34,7 @@ const weatherForecastCard2: WeatherForecastCard = weatherForecastCard(
 );
 
 const weatherForecastCard3: WeatherForecastCard = weatherForecastCard(
-    weatherForecastCards.item(2),
+    weatherForecastColumns.item(2),
     "12/28/2023",
     "",
     61,
@@ -47,7 +43,7 @@ const weatherForecastCard3: WeatherForecastCard = weatherForecastCard(
 );
 
 const weatherForecastCard4: WeatherForecastCard = weatherForecastCard(
-    weatherForecastCards.item(3),
+    weatherForecastColumns.item(3),
     "12/29/2023",
     "",
     59,
@@ -56,7 +52,7 @@ const weatherForecastCard4: WeatherForecastCard = weatherForecastCard(
 );
 
 const weatherForecastCard5: WeatherForecastCard = weatherForecastCard(
-    weatherForecastCards.item(4),
+    weatherForecastColumns.item(4),
     "12/30/2023",
     "",
     68,
@@ -64,7 +60,11 @@ const weatherForecastCard5: WeatherForecastCard = weatherForecastCard(
     12
 );
 
-const searchCityButton = new SearchButton(<HTMLButtonElement> searchCityHtmlButton, <HTMLInputElement> searchCityHtmlTextInput, <HTMLUListElement> searchCityHistoryUlElement);
+const searchCityInput = document.getElementById("searchInput") as HTMLInputElement;
+const searchCityForm = document.getElementById("searchForm");
+const citySearchHistoryUlElement = document.getElementById("citySearchHistoryList") as HTMLUListElement;
+
+searchCityForm?.addEventListener("submit", event => searchSubmitEvent(event, searchCityInput, weatherDayCard, citySearchHistoryUlElement));
 
 
 
@@ -77,4 +77,4 @@ const searchCityButton = new SearchButton(<HTMLButtonElement> searchCityHtmlButt
 
 const searchHistoryLiButton = createSearchHistoryLIButton("Blep");
 
-searchCityHistoryUlElement?.appendChild(searchHistoryLiButton);
+citySearchHistoryUlElement?.appendChild(searchHistoryLiButton);
