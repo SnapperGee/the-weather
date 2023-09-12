@@ -1,8 +1,8 @@
-export const searchSubmitEvent = ( mouseEvent: MouseEvent,
+export const searchSubmitEvent = ( submitEvent: SubmitEvent,
                                    htmlInputElement: NonNullable<HTMLInputElement>,
                                    htmlLIElement: NonNullable<HTMLUListElement> ): void =>
 {
-    mouseEvent.preventDefault();
+    submitEvent.preventDefault();
 
     let formattedHtmlInput: string;
 

@@ -29,7 +29,7 @@ export class SearchButton
         this.#htmlInputElement = htmlInputElement;
         this.#htmlUlElement = htmlUlElement;
 
-        this.#htmlButtonElement.addEventListener("click", event => searchSubmitEvent(event, this.#htmlInputElement, this.#htmlUlElement));
+        this.#htmlButtonElement.addEventListener("submit", event => searchSubmitEvent(event, this.#htmlInputElement, this.#htmlUlElement));
     }
 
     public get HTMLButtonElement(): HTMLButtonElement { return this.#htmlButtonElement; }
