@@ -1,6 +1,6 @@
-export const searchCityButtonClickEvent = ( mouseEvent: MouseEvent,
-                                            htmlInputElement: NonNullable<HTMLInputElement>,
-                                            htmlLIElement: NonNullable<HTMLUListElement> ): void =>
+export const searchSubmitEvent = ( mouseEvent: MouseEvent,
+                                   htmlInputElement: NonNullable<HTMLInputElement>,
+                                   htmlLIElement: NonNullable<HTMLUListElement> ): void =>
 {
     mouseEvent.preventDefault();
 

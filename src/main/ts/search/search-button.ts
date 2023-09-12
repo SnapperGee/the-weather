@@ -1,6 +1,6 @@
-import { searchCityButtonClickEvent } from "./search-city-button-click-event";
+import { searchSubmitEvent } from "./search-submit-event";
 
-export class SearchCityButton
+export class SearchButton
 {
     readonly #htmlButtonElement: HTMLButtonElement;
     readonly #htmlInputElement: HTMLInputElement;
@@ -29,7 +29,7 @@ export class SearchCityButton
         this.#htmlInputElement = htmlInputElement;
         this.#htmlUlElement = htmlUlElement;
 
-        this.#htmlButtonElement.addEventListener("click", event => searchCityButtonClickEvent(event, this.#htmlInputElement, this.#htmlUlElement));
+        this.#htmlButtonElement.addEventListener("click", event => searchSubmitEvent(event, this.#htmlInputElement, this.#htmlUlElement));
     }
 
     public get HTMLButtonElement(): HTMLButtonElement { return this.#htmlButtonElement; }

@@ -1,5 +1,5 @@
-import { SearchCityButton } from "./search-city-button";
-import createSearchHistoryLIButton from "./create-search-history-li-button";
+import { SearchButton } from "./search/search-button";
+import createSearchHistoryLIButton from "./search/create-search-history-li-button";
 import { type WeatherDayCard, weatherDayCard as createWeatherDayCard } from "./weather-day-card";
 import { type WeatherForecastCard, weatherForecastCard } from "./weather-forecast-card";
 
@@ -64,7 +64,7 @@ const weatherForecastCard5: WeatherForecastCard = weatherForecastCard(
     12
 );
 
-const searchCityButton = new SearchCityButton(<HTMLButtonElement> searchCityHtmlButton, <HTMLInputElement> searchCityHtmlTextInput, <HTMLUListElement> searchCityHistoryUlElement);
+const searchCityButton = new SearchButton(<HTMLButtonElement> searchCityHtmlButton, <HTMLInputElement> searchCityHtmlTextInput, <HTMLUListElement> searchCityHistoryUlElement);
 
 
 
