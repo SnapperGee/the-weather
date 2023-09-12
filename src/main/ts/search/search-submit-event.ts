@@ -1,8 +1,9 @@
-import { fetchWeatherForecastData as fetchWeatherForecastData, isRecognizedCityName, isRecognizedCountryName } from "../cities";
-import { convertKelvinToFahrenheit, reformatDateString } from "../util";
+import { fetchCurrentWeatherData, fetchWeatherForecastData as fetchWeatherForecastData, isRecognizedCityName, isRecognizedCountryName } from "../cities";
+import { Icon, convertKelvinToFahrenheit, createOpenWeatherMapIconSrc, reformatDateString } from "../util";
 import { WeatherDayCard } from "../weather-day-card";
 import { WeatherForecastCard } from "../weather-forecast-card";
 import { formatSearchQuery, isValidSearchFormat } from "./search-query";
+import moment from "moment";
 
 export const searchSubmitEvent = ( submitEvent: SubmitEvent,
                                    htmlInputElement: NonNullable<HTMLInputElement>,
@@ -60,26 +61,33 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
             return;
         }
 
-        fetchWeatherForecastData(formattedSearchQuery[0], formattedSearchQuery[1])
-            .then(weatherForecast =>
+        fetchCurrentWeatherData(formattedSearchQuery[0], formattedSearchQuery[1])
+            .then(currentWeather =>
             {
-                console.log(weatherForecast);
-
-                const cityName = weatherForecast.city.name;
-
-                const currentDayForecast = weatherForecast.list[0];
-
-                const dt_txt = reformatDateString(currentDayForecast.dt_txt);
-                const icon = currentDayForecast.weather[0].icon;
-                const temp = convertKelvinToFahrenheit(currentDayForecast.main.temp);
-                const windSpeed = currentDayForecast.wind.speed;
-                const humidity = currentDayForecast.main.humidity;
+                const cityName = currentWeather.name;
+                const dt_txt = moment().format("MM/DD/YYYY");
+                const icon: Icon = {src: createOpenWeatherMapIconSrc(currentWeather.weather[0].icon), alt: `${currentWeather.weather[0].description} icon`};
+                const temp = convertKelvinToFahrenheit(currentWeather.main.temp);
+                const windSpeed = currentWeather.wind.speed;
+                const humidity = currentWeather.main.humidity;
 
                 weatherDayCard.cityName(cityName)
-                              .date(dt_txt).icon(icon)
+                              .date(dt_txt)
+                              .icon(icon)
                               .temp(temp)
                               .windSpeed(windSpeed)
                               .humidity(humidity);
+            }
+        );
+
+        fetchWeatherForecastData(formattedSearchQuery[0], formattedSearchQuery[1])
+            .then(weatherForecast =>
+            {
+                // console.log(weatherForecast);
+
+                const cityName = weatherForecast.city.name;
+
+                const firstDayForecast = weatherForecast.list[0];
 
                 const secondDayForecast = weatherForecast.list[6];
 

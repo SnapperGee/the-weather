@@ -1,6 +1,6 @@
 import citiesJson from "../resources/current.city.list.json";
 import { API_KEY } from "./env";
-import { type WeatherForecastAPIResponse } from "./weather-forecast-api-response";
+import { CurrentWeatherAPIResponse, type WeatherForecastAPIResponse } from "./weather-forecast-api-response";
 
 export interface Coordinates {lon: number, lat: number};
 
@@ -28,21 +28,42 @@ export function getCity(name: string, country: string): City | undefined
     return undefined;
 }
 
-export function createCityWeatherForecastFetchString(city: string, country: string): string
+export function createCurrentWeatherFetchString(city: string, country: string): string
 {
     const cityCoordinates: Coordinates | undefined = getCity(city, country)?.coord;
 
     if (cityCoordinates === undefined)
     {
-        throw new TypeError(`${createCityWeatherForecastFetchString.name}: Could not find city: "${city}", "${country}"`);
+        throw new Error(`${createCurrentWeatherFetchString.name}: Could not find city: "${city}", "${country}"`);
+    }
+
+    return `https://api.openweathermap.org/data/2.5/weather?lat=${cityCoordinates.lat}&lon=${cityCoordinates.lon}&appid=${API_KEY}`;
+}
+
+export function createWeatherForecastFetchString(city: string, country: string): string
+{
+    const cityCoordinates: Coordinates | undefined = getCity(city, country)?.coord;
+
+    if (cityCoordinates === undefined)
+    {
+        throw new Error(`${createWeatherForecastFetchString.name}: Could not find city: "${city}", "${country}"`);
     }
 
     return `https://api.openweathermap.org/data/2.5/forecast?lat=${cityCoordinates.lat}&lon=${cityCoordinates.lon}&appid=${API_KEY}`;
 }
 
+export async function fetchCurrentWeatherData(city: string, country: string): Promise<CurrentWeatherAPIResponse>
+{
+    const cityWeatherFetchString = createCurrentWeatherFetchString(city, country);
+
+    return fetch(cityWeatherFetchString)
+        .then(response => response.json())
+        .catch(err => {throw new Error(err)});
+}
+
 export async function fetchWeatherForecastData(city: string, country: string): Promise<WeatherForecastAPIResponse>
 {
-    const cityWeatherFetchString = createCityWeatherForecastFetchString(city, country);
+    const cityWeatherFetchString = createWeatherForecastFetchString(city, country);
 
     return fetch(cityWeatherFetchString)
         .then(response => response.json())

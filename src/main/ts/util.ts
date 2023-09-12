@@ -25,3 +25,5 @@ export const convertKelvinToCelsius = (aNumber: number): number => {
     const celsius = aNumber - 273.15;
     return Math.round((celsius + Number.EPSILON) * 100) / 100;
 }
+
+export const createOpenWeatherMapIconSrc = (aString: string): string => `http://openweathermap.org/img/w/${aString}.png`;
