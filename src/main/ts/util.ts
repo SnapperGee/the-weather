@@ -2,7 +2,7 @@ export const DEFAULT_ICON_ALT: string = "weather condition icon";
 
 export interface Icon {src: string, alt: string};
 
-export const reformatDateString = (aString: string): string => {
+export const formatDateString = (aString: string): string => {
     const shortenedString = aString.substring(0, aString.indexOf("\u0020"));
 
     const splitString = shortenedString.split("-");

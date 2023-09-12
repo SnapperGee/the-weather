@@ -1,5 +1,5 @@
 import { fetchCurrentWeatherData, fetchWeatherForecastData as fetchWeatherForecastData, isRecognizedCityName, isRecognizedCountryName } from "../cities";
-import { Icon, convertKelvinToFahrenheit, createOpenWeatherMapIconSrc, reformatDateString } from "../util";
+import { Icon, convertKelvinToFahrenheit, createOpenWeatherMapIconSrc, formatDateString } from "../util";
 import { WeatherDayCard } from "../weather-day-card";
 import { WeatherForecastCard } from "../weather-forecast-card";
 import { formatSearchQuery, isValidSearchFormat } from "./search-query";
@@ -71,31 +71,56 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
                 const windSpeed = currentWeather.wind.speed;
                 const humidity = currentWeather.main.humidity;
 
+                weatherDayCard.hide();
+
                 weatherDayCard.cityName(cityName)
                               .date(dt_txt)
                               .icon(icon)
                               .temp(temp)
                               .windSpeed(windSpeed)
                               .humidity(humidity);
+
+                weatherDayCard.show();
             }
         );
 
         fetchWeatherForecastData(formattedSearchQuery[0], formattedSearchQuery[1])
             .then(weatherForecast =>
             {
-                // console.log(weatherForecast);
+                console.log(weatherForecast);
 
                 const cityName = weatherForecast.city.name;
 
-                const firstDayForecast = weatherForecast.list[0];
+                const weatherForecastDays = Object.freeze([
+                    weatherForecast.list[5],
+                    weatherForecast.list[13],
+                    weatherForecast.list[21],
+                    weatherForecast.list[29],
+                    weatherForecast.list[37]
+                ]);
 
-                const secondDayForecast = weatherForecast.list[6];
+                for (const index in weatherForecastDays)
+                {
+                    const weatherForecastData = weatherForecastDays[index];
 
-                const thirdDayForecast = weatherForecast.list[14];
+                    const dt_txt = formatDateString(weatherForecastData.dt_txt);
+                    const icon: Icon = {src: createOpenWeatherMapIconSrc(weatherForecastData.weather[0].icon), alt: `${weatherForecastData.weather[0].description} icon`};
+                    const temp = convertKelvinToFahrenheit(weatherForecastData.main.temp);
+                    const windSpeed = weatherForecastData.wind.speed;
+                    const humidity = weatherForecastData.main.humidity;
 
-                const fourthDayForecast = weatherForecast.list[30];
+                    const weatherForecastCard = weatherForecastCards[index];
 
-                const fifthDayForecast = weatherForecast.list[38];
+                    weatherForecastCard.hide();
+
+                    weatherForecastCard.date(dt_txt);
+                    weatherForecastCard.icon(icon);
+                    weatherForecastCard.temp(temp);
+                    weatherForecastCard.wind(windSpeed);
+                    weatherForecastCard.humidity(humidity);
+
+                    weatherForecastCard.show();
+                }
             }
         );
 
