@@ -1,6 +1,6 @@
 import citiesJson from "../resources/current.city.list.json";
 import { API_KEY } from "./env";
-import { type WeatherAPIResponse } from "./weather-api-response";
+import { type WeatherForecastAPIResponse } from "./weather-forecast-api-response";
 
 export interface Coordinates {lon: number, lat: number};
 
@@ -40,7 +40,7 @@ export function createCityWeatherFetchString(city: string, country: string): str
     return `https://api.openweathermap.org/data/2.5/forecast?lat=${cityCoordinates.lat}&lon=${cityCoordinates.lon}&appid=${API_KEY}`;
 }
 
-export async function fetchWeatherData(city: string, country: string): Promise<WeatherAPIResponse>
+export async function fetchWeatherForecastData(city: string, country: string): Promise<WeatherForecastAPIResponse>
 {
     const cityWeatherFetchString = createCityWeatherFetchString(city, country);
 

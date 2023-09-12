@@ -64,7 +64,15 @@ const searchCityInput = document.getElementById("searchInput") as HTMLInputEleme
 const searchCityForm = document.getElementById("searchForm");
 const citySearchHistoryUlElement = document.getElementById("citySearchHistoryList") as HTMLUListElement;
 
-searchCityForm?.addEventListener("submit", event => searchSubmitEvent(event, searchCityInput, weatherDayCard, citySearchHistoryUlElement));
+searchCityForm?.addEventListener("submit", event => searchSubmitEvent(
+    event,
+    searchCityInput,
+    weatherDayCard,
+    [
+        weatherForecastCard1, weatherForecastCard2, weatherForecastCard3,
+        weatherForecastCard4, weatherForecastCard5
+    ],
+    citySearchHistoryUlElement));
 
 
 

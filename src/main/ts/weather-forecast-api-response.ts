@@ -18,7 +18,7 @@ export interface DailyWeather
     }
 }
 
-export interface WeatherAPIResponse
+export interface WeatherForecastAPIResponse
 {
     city: City,
     list: readonly DailyWeather[]

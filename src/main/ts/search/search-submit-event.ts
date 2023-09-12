@@ -1,11 +1,13 @@
-import { fetchWeatherData, isRecognizedCityName, isRecognizedCountryName } from "../cities";
+import { fetchWeatherForecastData as fetchWeatherForecastData, isRecognizedCityName, isRecognizedCountryName } from "../cities";
 import { convertKelvinToFahrenheit, reformatDateString } from "../util";
 import { WeatherDayCard } from "../weather-day-card";
+import { WeatherForecastCard } from "../weather-forecast-card";
 import { formatSearchQuery, isValidSearchFormat } from "./search-query";
 
 export const searchSubmitEvent = ( submitEvent: SubmitEvent,
                                    htmlInputElement: NonNullable<HTMLInputElement>,
                                    weatherDayCard: WeatherDayCard,
+                                   weatherForecastCards: WeatherForecastCard[],
                                    htmlUlElement: NonNullable<HTMLUListElement> ): void =>
 {
     submitEvent.preventDefault();
@@ -58,7 +60,7 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
             return;
         }
 
-        fetchWeatherData(formattedSearchQuery[0], formattedSearchQuery[1])
+        fetchWeatherForecastData(formattedSearchQuery[0], formattedSearchQuery[1])
             .then(weatherForecast =>
             {
                 console.log(weatherForecast);
