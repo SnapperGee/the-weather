@@ -1,6 +1,7 @@
 export interface DailyWeather
 {
     dt: number,
+    dt_txt: string,
     main: {
       temp: number,
       humidity: number
@@ -12,8 +13,7 @@ export interface DailyWeather
     ],
     wind: {
       speed: number
-    },
-    dt_txt: string
+    }
 }
 
 export interface WeatherAPIResponse
