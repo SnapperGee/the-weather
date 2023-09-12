@@ -1,7 +1,22 @@
-import createSearchHistoryLIButton from "./search/create-search-history-li-button";
 import { type WeatherDayCard, weatherDayCard as createWeatherDayCard } from "./weather-day-card";
 import { type WeatherForecastCard, weatherForecastCard } from "./weather-forecast-card";
-import { searchSubmitEvent } from "./search/search-submit-event"
+import { searchSubmitEvent } from "./search/search-submit-event";
+import createSearchHistoryLIButton from "./search/create-search-history-li-button";
+
+const searchHistoryString: string | null = localStorage.getItem("searchHistory");
+
+const searchHistoryStringArray: readonly string[] = searchHistoryString !== null ? JSON.parse(searchHistoryString) : [];
+
+const searchHistoryButtons = document.createDocumentFragment();
+
+searchHistoryStringArray.forEach(searchHistoryString => {
+    const liButton = createSearchHistoryLIButton(searchHistoryString);
+    searchHistoryButtons.appendChild(liButton);
+})
+
+const searchHistoryUlElement = document.getElementById("citySearchHistoryList");
+
+searchHistoryUlElement?.appendChild(searchHistoryButtons);
 
 const weatherForecastColumns = document.getElementsByClassName("weatherForecastColumn") as HTMLCollectionOf<HTMLElement>;
 
@@ -51,7 +66,3 @@ searchCityForm?.addEventListener("submit", event => { searchSubmitEvent(
     ],
     citySearchHistoryUlElement)
 });
-
-const searchHistoryLiButton = createSearchHistoryLIButton("Blep");
-
-citySearchHistoryUlElement?.appendChild(searchHistoryLiButton);

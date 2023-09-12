@@ -6,6 +6,7 @@ import { formatSearchQuery, isValidSearchFormat } from "./search-query";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import tz from "dayjs/plugin/timezone";
+import createSearchHistoryLIButton from "./create-search-history-li-button";
 
 dayjs.extend(utc);
 dayjs.extend(tz);
@@ -67,6 +68,10 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
             return;
         }
 
+        const searchHistoryString: string | null = localStorage.getItem("searchHistory");
+
+        const searchHistoryArray: string[] = searchHistoryString !== null ? JSON.parse(searchHistoryString) : [];
+
         fetchCurrentWeatherData(formattedSearchQuery[0], formattedSearchQuery[1])
             .then(currentWeather =>
             {
@@ -93,6 +98,37 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
                               .humidity(humidity);
 
                 weatherDayCard.show();
+
+                const prettySearchString = formattedSearchQuery.join(", ");
+
+                const preExistingSearchHistoryIndex = searchHistoryArray.findIndex(preExistingSearchHistoryString => prettySearchString.localeCompare(preExistingSearchHistoryString, undefined, {sensitivity: "base"}) === 0);
+
+                if (preExistingSearchHistoryIndex !== -1)
+                {
+                    searchHistoryArray.splice(preExistingSearchHistoryIndex, 1);
+                }
+                else if (searchHistoryArray.length >= 20)
+                {
+                    searchHistoryArray.pop();
+                }
+
+                searchHistoryArray.unshift(prettySearchString);
+
+                localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArray));
+
+                const searchHistoryListItems = htmlUlElement.querySelectorAll("li");
+
+                Array.from(searchHistoryListItems).forEach(searchHistoryListItem =>{
+                    const searchHistoryButton = searchHistoryListItem.querySelector("button");
+                    if (searchHistoryButton?.textContent?.localeCompare(prettySearchString, undefined, {sensitivity: "base"}) === 0)
+                    {
+                        searchHistoryListItem.remove();
+                    }
+                });
+
+                const newSearchHistoryLIButton = createSearchHistoryLIButton(prettySearchString);
+
+                htmlUlElement.prepend(newSearchHistoryLIButton);
             }
         );
 

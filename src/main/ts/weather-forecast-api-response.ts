@@ -5,6 +5,9 @@ export interface CurrentWeatherAPIResponse
   name: string,
   dt: number,
   timezone: number,
+  sys: {
+    country: string
+  }
   main: {
     temp: number,
     humidity: number
