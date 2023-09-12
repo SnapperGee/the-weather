@@ -1,8 +1,8 @@
 import citiesJson from "../resources/current.city.list.json";
 
-export type Coordinates = {lon: number, lat: number};
+export interface Coordinates {lon: number, lat: number};
 
-export type City = {id: number, name: string, country: string, coord: Coordinates};
+export interface City {id: number, name: string, country: string, coord: Coordinates};
 
 export const cities: readonly City[] = Object.freeze(citiesJson) as readonly City[];
 
