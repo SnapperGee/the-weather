@@ -28,13 +28,13 @@ export function getCity(name: string, country: string): City | undefined
     return undefined;
 }
 
-export function createCityWeatherFetchString(city: string, country: string): string
+export function createCityWeatherForecastFetchString(city: string, country: string): string
 {
     const cityCoordinates: Coordinates | undefined = getCity(city, country)?.coord;
 
     if (cityCoordinates === undefined)
     {
-        throw new TypeError(`${createCityWeatherFetchString.name}: Could not find city: "${city}", "${country}"`);
+        throw new TypeError(`${createCityWeatherForecastFetchString.name}: Could not find city: "${city}", "${country}"`);
     }
 
     return `https://api.openweathermap.org/data/2.5/forecast?lat=${cityCoordinates.lat}&lon=${cityCoordinates.lon}&appid=${API_KEY}`;
@@ -42,7 +42,7 @@ export function createCityWeatherFetchString(city: string, country: string): str
 
 export async function fetchWeatherForecastData(city: string, country: string): Promise<WeatherForecastAPIResponse>
 {
-    const cityWeatherFetchString = createCityWeatherFetchString(city, country);
+    const cityWeatherFetchString = createCityWeatherForecastFetchString(city, country);
 
     return fetch(cityWeatherFetchString)
         .then(response => response.json())
