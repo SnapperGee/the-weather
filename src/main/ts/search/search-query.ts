@@ -6,7 +6,7 @@ const commaFollowedBy2AdjacentNonWhitespaceChars = /^,\s*\S{2}\s*$/;
 export const isNotBlank = (aString: string): boolean => isNotBlankRegex.test(aString);
 export const isBlank = (aString: string): boolean => ! isNotBlankRegex.test(aString);
 
-export const isValidSearchQuery = (aString: string): boolean =>
+export const isValidSearchFormat = (aString: string): boolean =>
 {
     // empty/blank string is invalid
     if (isBlank(aString))
