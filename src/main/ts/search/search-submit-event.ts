@@ -116,7 +116,7 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
                     weatherForecastCard.date(dt_txt);
                     weatherForecastCard.icon(icon);
                     weatherForecastCard.temp(temp);
-                    weatherForecastCard.wind(windSpeed);
+                    weatherForecastCard.windSpeed(windSpeed);
                     weatherForecastCard.humidity(humidity);
 
                     weatherForecastCard.show();

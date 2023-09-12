@@ -100,7 +100,7 @@ export class WeatherForecastCard
         return this;
     }
 
-    public wind(windSpeed: number): WeatherForecastCard
+    public windSpeed(windSpeed: number): WeatherForecastCard
     {
         this.#windSpeed = windSpeed;
         this.#windParagraph.textContent = `Wind: ${this.#windSpeed} MPH`;
