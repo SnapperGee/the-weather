@@ -7,81 +7,50 @@ const weatherForecastColumns = document.getElementsByClassName("weatherForecastC
 
 const weatherDayCard: WeatherDayCard = createWeatherDayCard(
     document.getElementById("weatherDayCard"),
-    "San Francisco",
-    "12/25/2023",
-    "",
-    67,
-    2.22,
-    10
+    "", "", "", 0, 0, 0
 );
 
 const weatherForecastCard1: WeatherForecastCard = weatherForecastCard(
     weatherForecastColumns.item(0),
-    "12/26/2023",
-    "",
-    58,
-    8.99,
-    25
+    "", "", 0, 0, 0
 );
 
 const weatherForecastCard2: WeatherForecastCard = weatherForecastCard(
     weatherForecastColumns.item(1),
-    "12/27/2023",
-    "",
-    63,
-    3.12,
-    14
+    "", "", 0, 0, 0
 );
 
 const weatherForecastCard3: WeatherForecastCard = weatherForecastCard(
     weatherForecastColumns.item(2),
-    "12/28/2023",
-    "",
-    61,
-    1.11,
-    3
+    "", "", 0, 0, 0
 );
 
 const weatherForecastCard4: WeatherForecastCard = weatherForecastCard(
     weatherForecastColumns.item(3),
-    "12/29/2023",
-    "",
-    59,
-    5.47,
-    10
+    "", "", 0, 0, 0
 );
 
 const weatherForecastCard5: WeatherForecastCard = weatherForecastCard(
     weatherForecastColumns.item(4),
-    "12/30/2023",
-    "",
-    68,
-    3,
-    12
+    "", "", 0, 0, 0
 );
 
 const searchCityInput = document.getElementById("searchInput") as HTMLInputElement;
 const searchCityForm = document.getElementById("searchForm");
 const citySearchHistoryUlElement = document.getElementById("citySearchHistoryList") as HTMLUListElement;
+const weatherForecastHeader = document.getElementById("forecastHeaderRow");
 
-searchCityForm?.addEventListener("submit", event => searchSubmitEvent(
+searchCityForm?.addEventListener("submit", event => { searchSubmitEvent(
     event,
     searchCityInput,
     weatherDayCard,
+    weatherForecastHeader!,
     [
         weatherForecastCard1, weatherForecastCard2, weatherForecastCard3,
         weatherForecastCard4, weatherForecastCard5
     ],
-    citySearchHistoryUlElement));
-
-
-
-
-
-
-
-
-
+    citySearchHistoryUlElement)
+});
 
 const searchHistoryLiButton = createSearchHistoryLIButton("Blep");
 
