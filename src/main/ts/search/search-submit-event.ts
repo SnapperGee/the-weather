@@ -3,11 +3,17 @@ import { Icon, convertKelvinToFahrenheit, createOpenWeatherMapIconSrc, formatDat
 import { WeatherDayCard } from "../weather-day-card";
 import { WeatherForecastCard } from "../weather-forecast-card";
 import { formatSearchQuery, isValidSearchFormat } from "./search-query";
-import moment from "moment";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import tz from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(tz);
 
 export const searchSubmitEvent = ( submitEvent: SubmitEvent,
                                    htmlInputElement: NonNullable<HTMLInputElement>,
                                    weatherDayCard: WeatherDayCard,
+                                   weatherForecastHeader: HTMLElement,
                                    weatherForecastCards: WeatherForecastCard[],
                                    htmlUlElement: NonNullable<HTMLUListElement> ): void =>
 {
@@ -64,8 +70,14 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
         fetchCurrentWeatherData(formattedSearchQuery[0], formattedSearchQuery[1])
             .then(currentWeather =>
             {
+                // Get current time
+                const now = dayjs().utc().tz(dayjs.tz.guess());
+
+                // Current date to display in header
+                const currentDayString = now.format("MM/DD/YYYY");
+
                 const cityName = currentWeather.name;
-                const dt_txt = moment().format("MM/DD/YYYY");
+                const dt_txt = currentDayString;
                 const icon: Icon = {src: createOpenWeatherMapIconSrc(currentWeather.weather[0].icon), alt: `${currentWeather.weather[0].description} icon`};
                 const temp = convertKelvinToFahrenheit(currentWeather.main.temp);
                 const windSpeed = currentWeather.wind.speed;
@@ -87,10 +99,6 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
         fetchWeatherForecastData(formattedSearchQuery[0], formattedSearchQuery[1])
             .then(weatherForecast =>
             {
-                console.log(weatherForecast);
-
-                const cityName = weatherForecast.city.name;
-
                 const weatherForecastDays = Object.freeze([
                     weatherForecast.list[5],
                     weatherForecast.list[13],
@@ -121,6 +129,8 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
 
                     weatherForecastCard.show();
                 }
+
+                weatherForecastHeader.style.display = "block";
             }
         );
 
