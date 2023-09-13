@@ -50,7 +50,23 @@ export function formatSearchQuery(aStringOrStrings: string | string[]): string |
 {
     if (aStringOrStrings instanceof Array)
     {
-        return aStringOrStrings.filter(str => isNotBlank(str)).map(str => str.trim().replaceAll(twoOrMoreWhiteSpaces, "\u0020"));
+        return aStringOrStrings.filter(str => isNotBlank(str)).map((str, index) => {
+
+            const whiteSpaceFormattedString = str.trim().replaceAll(twoOrMoreWhiteSpaces, "\u0020");
+
+            let formattedString;
+
+            if (index === 0)
+            {
+                formattedString = whiteSpaceFormattedString.split("\u0020").map(aStr => aStr[0].toUpperCase() + aStr.substring(1)).join("\u0020")
+            }
+            else
+            {
+                formattedString = whiteSpaceFormattedString.toUpperCase()
+            }
+
+            return formattedString;
+        });
     }
     else
     {
