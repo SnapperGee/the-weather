@@ -2,7 +2,6 @@ import { fetchCurrentWeatherData, fetchWeatherForecastData } from "../cities";
 import { type Icon, createOpenWeatherMapIconSrc, convertKelvinToFahrenheit, formatDateString } from "../util";
 import { formatSearchQuery } from "./search-query";
 import { WeatherDayCard } from "../weather-day-card";
-import { createSearchHistoryLIButton } from "./create-search-history-li-button";
 import { WeatherForecastCard } from "../weather-forecast-card";
 import dayjs from "dayjs";
 
