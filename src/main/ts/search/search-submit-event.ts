@@ -6,7 +6,8 @@ import { formatSearchQuery, isValidSearchFormat } from "./search-query";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import tz from "dayjs/plugin/timezone";
-import createSearchHistoryLIButton from "./create-search-history-li-button";
+import { createSearchHistoryLIButton } from "./create-search-history-li-button";
+import searchHistoryButtonClickEvent from "./search-history-button-click-event";
 
 dayjs.extend(utc);
 dayjs.extend(tz);
@@ -127,6 +128,12 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
                 });
 
                 const newSearchHistoryLIButton = createSearchHistoryLIButton(prettySearchString);
+
+                newSearchHistoryLIButton.addEventListener("click", event => searchHistoryButtonClickEvent( event,
+                                                                                                           submitEvent.target as HTMLFormElement,
+                                                                                                           weatherDayCard,
+                                                                                                           weatherForecastHeader,
+                                                                                                           weatherForecastCards ))
 
                 htmlUlElement.prepend(newSearchHistoryLIButton);
             }
