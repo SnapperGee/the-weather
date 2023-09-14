@@ -59,7 +59,7 @@ export class WeatherForecastCard
         this.#windSpeed = windSpeed;
         this.#humidity = humidity;
 
-        this.#dateTitle = this.#htmlSectionElement.querySelector("h4")!;
+        this.#dateTitle = this.#htmlSectionElement.querySelector("h5")!;
         this.#weatherConditionImg = this.#htmlSectionElement.querySelector("img")!;
 
         const paragraphs = this.#htmlSectionElement.querySelectorAll("p");
