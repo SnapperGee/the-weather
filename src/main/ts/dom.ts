@@ -72,9 +72,9 @@ export function weatherForecastRow(): HTMLDivElement
 {
     _weatherForecastRow = document.getElementById("weatherForecastRow") as HTMLDivElement;
 
-    if ( ! (_weatherForecastRow instanceof HTMLInputElement))
+    if ( ! (_weatherForecastRow instanceof HTMLDivElement))
     {
-        throw new TypeError(`${searchInput.name}: ${_weatherForecastRow === null ? "null" : "non " + HTMLDivElement.name} weather forecast row.`);
+        throw new TypeError(`${weatherForecastRow.name}: ${_weatherForecastRow === null ? "null" : "non " + HTMLDivElement.name} weather forecast row.`);
     }
 
     return _weatherForecastRow;
