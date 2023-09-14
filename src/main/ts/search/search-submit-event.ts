@@ -88,6 +88,8 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
 
             const prettySearchString = formattedSearchQuery.join(", ");
 
+            htmlInputElement.value = prettySearchString;
+
             const preExistingSearchHistoryIndex = searchHistoryArray.findIndex(preExistingSearchHistoryString => prettySearchString.localeCompare(preExistingSearchHistoryString, undefined, {sensitivity: "base"}) === 0);
 
             if (preExistingSearchHistoryIndex !== -1)
