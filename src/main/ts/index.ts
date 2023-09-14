@@ -1,3 +1,8 @@
+/**
+ * The main access point of this web application.
+ * @module index
+ */
+
 import { type CurrentWeatherCard, currentWeatherCard as createWeatherDayCard } from "./current-weather-card";
 import { type WeatherForecastCard, weatherForecastCard } from "./weather-forecast-card";
 import { searchSubmitEvent } from "./search/search-submit-event";

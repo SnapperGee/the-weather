@@ -158,6 +158,20 @@ export function weatherForecastRow(): HTMLDivElement
     return _weatherForecastRow;
 }
 
+let _searchHistoryLIButtons: NodeListOf<HTMLLIElement> | null = null;
+
+export function searchHistoryLIButtons(): NodeListOf<HTMLLIElement>
+{
+    _searchHistoryLIButtons = searchHistoryButtonList().querySelectorAll("li") as NodeListOf<HTMLLIElement>;
+
+    if ( ! Object.prototype.isPrototypeOf.call(NodeList.prototype, _searchHistoryLIButtons))
+    {
+        throw new TypeError(`${searchHistoryLIButtons.name}: ${_searchHistoryLIButtons === null ? "null" : "non " + "NodeListOf<HTMLLIElement>"} search history LI Buttons.`);
+    }
+
+    return _searchHistoryLIButtons;
+}
+
 export default {
     rootRow: Object.freeze(() => rootRow()),
     weatherInfoColumn: Object.freeze(() => weatherInfoColumn()),
@@ -166,5 +180,6 @@ export default {
     searchForm: Object.freeze((): HTMLFormElement => searchForm()),
     searchHistoryButtonList: Object.freeze(():HTMLUListElement => searchHistoryButtonList()),
     searchInput: Object.freeze((): HTMLInputElement => searchInput()),
-    weatherForecastRow: Object.freeze((): HTMLDivElement => weatherForecastRow())
+    weatherForecastRow: Object.freeze((): HTMLDivElement => weatherForecastRow()),
+    searchHistoryLIButtons: Object.freeze((): NodeListOf<HTMLLIElement> => searchHistoryLIButtons())
 };

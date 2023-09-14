@@ -1,22 +1,29 @@
+/**
+ * @module cities
+ */
+
 import citiesJson from "../resource/current.city.list.json";
 import { API_KEY } from "./env";
 import { CurrentWeatherAPIResponse, type WeatherForecastAPIResponse } from "./weather-forecast-api-response";
 
+/**
+ * Object used as a container for the longitude and latitude values used for geo locating a city.
+ */
 export interface Coordinates {lon: number, lat: number};
 
 export interface City {name: string, country: string, coord: Coordinates};
 
 export const cities: readonly City[] = Object.freeze(citiesJson) as readonly City[];
 
-export const cityNames: ReadonlySet<string> = Object.freeze(new Set(cities.map(city => city.name.toUpperCase())));
+const cityNames: ReadonlySet<string> = Object.freeze(new Set(cities.map(city => city.name.toUpperCase())));
 
-export const countryNames: ReadonlySet<string> = Object.freeze(new Set(cities.map(city => city.country.toUpperCase())));
+const countryNames: ReadonlySet<string> = Object.freeze(new Set(cities.map(city => city.country.toUpperCase())));
 
 export const isRecognizedCityName = (aString: string): boolean => cityNames.has(aString.toUpperCase());
 
 export const isRecognizedCountryName = (aString: string): boolean => countryNames.has(aString.toUpperCase());
 
-export function getCity(name: string, country: string): City | undefined
+function getCity(name: string, country: string): City | undefined
 {
     if (isRecognizedCityName(name) && isRecognizedCountryName(country))
     {
@@ -28,7 +35,7 @@ export function getCity(name: string, country: string): City | undefined
     return undefined;
 }
 
-export function createCurrentWeatherFetchString(city: string, country: string): string
+function createCurrentWeatherFetchString(city: string, country: string): string
 {
     const cityCoordinates: Coordinates | undefined = getCity(city, country)?.coord;
 
@@ -40,7 +47,7 @@ export function createCurrentWeatherFetchString(city: string, country: string): 
     return `https://api.openweathermap.org/data/2.5/weather?lat=${cityCoordinates.lat}&lon=${cityCoordinates.lon}&appid=${API_KEY}`;
 }
 
-export function createWeatherForecastFetchString(city: string, country: string): string
+function createWeatherForecastFetchString(city: string, country: string): string
 {
     const cityCoordinates: Coordinates | undefined = getCity(city, country)?.coord;
 
@@ -52,6 +59,15 @@ export function createWeatherForecastFetchString(city: string, country: string):
     return `https://api.openweathermap.org/data/2.5/forecast?lat=${cityCoordinates.lat}&lon=${cityCoordinates.lon}&appid=${API_KEY}`;
 }
 
+/**
+ * Makes a call to the OpenWeatherMap API for the current weather.
+ *
+ * @param city The city name to use for the weather API call.
+ *
+ * @param country The country name to use for the weather API call.
+ *
+ * @returns the current weather API response promise.
+ */
 export async function fetchCurrentWeatherData(city: string, country: string): Promise<CurrentWeatherAPIResponse>
 {
     const cityWeatherFetchString = createCurrentWeatherFetchString(city, country);
@@ -61,6 +77,15 @@ export async function fetchCurrentWeatherData(city: string, country: string): Pr
         .catch(err => {throw new Error(err)});
 }
 
+/**
+ * Makes a call to the OpenWeatherMap API for the 5 day weather forecast.
+ *
+ * @param city The city name to use for the weather API call.
+ *
+ * @param country The country name to use for the weather API call.
+ *
+ * @returns the 5 day weather forecast API response promise.
+ */
 export async function fetchWeatherForecastData(city: string, country: string): Promise<WeatherForecastAPIResponse>
 {
     const cityWeatherFetchString = createWeatherForecastFetchString(city, country);
