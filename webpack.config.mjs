@@ -22,7 +22,7 @@ export default function(env, argv) {
                     exclude: /node_modules/,
                 },
                 {
-                    test: /\.s[a|c]ss$/,
+                    test: /\.s[ac]ss$/,
                     use: [
                         env.production ? MiniCssExtractPlugin.loader : 'style-loader',
                         'css-loader',
