@@ -60,7 +60,8 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
                                  ? formatSearchQuery(searchQueryString.split(","))
                                  : formatSearchQuery(searchQueryString);
 
-    // If user input isn't a valid format, display alert and don't make a call to weather API
+    // If user input isn't a valid format, display alert and don't make a call to weather API. ATM, it only accepts
+    // formats consisting of comma separated city names and country names.
     if ( ! isValidSearchFormat(searchQueryString) || typeof formattedSearchQuery === "string")
     {
         alert(`Invalid search query string format: "${searchQueryString}".\n\nA city name followed by a comma and 2 letter country name expected such as:\n\n San Francisco, US`);
