@@ -35,8 +35,6 @@ const weatherForecastCard5: WeatherForecastCard = weatherForecastCard(
     "", "", 0, 0, 0
 );
 
-const searchHistoryUlElement = document.getElementById("citySearchHistoryList");
-
 const searchHistoryButtons = document.createDocumentFragment();
 
 const searchHistoryString: string | null = localStorage.getItem("searchHistory");
@@ -55,9 +53,9 @@ searchHistoryStringArray.forEach(searchHistoryString => {
     searchHistoryButtons.appendChild(searchHistoryLIButton);
 });
 
-searchHistoryUlElement?.appendChild(searchHistoryButtons);
+const searchHistoryButtonList = document.getElementById("searchHistoryButtonList");
 
-const citySearchHistoryUlElement = document.getElementById("citySearchHistoryList") as HTMLUListElement;
+searchHistoryButtonList?.appendChild(searchHistoryButtons);
 
 searchForm().addEventListener("submit", event => { searchSubmitEvent(
     event,
@@ -68,5 +66,5 @@ searchForm().addEventListener("submit", event => { searchSubmitEvent(
         weatherForecastCard1, weatherForecastCard2, weatherForecastCard3,
         weatherForecastCard4, weatherForecastCard5
     ],
-    citySearchHistoryUlElement)
+    searchHistoryButtonList as HTMLUListElement)
 });

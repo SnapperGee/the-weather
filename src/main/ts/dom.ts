@@ -38,7 +38,7 @@ export function searchHistoryButtonList(): HTMLUListElement
 {
     if (_searchHistoryButtonList === null)
     {
-        _searchHistoryButtonList = document.getElementById("citySearchHistoryList") as HTMLUListElement;
+        _searchHistoryButtonList = document.getElementById("searchHistoryButtonList") as HTMLUListElement;
 
         if ( ! (_searchHistoryButtonList instanceof HTMLUListElement))
         {
