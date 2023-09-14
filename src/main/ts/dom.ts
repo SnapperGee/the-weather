@@ -66,16 +66,16 @@ export function searchInput(): HTMLInputElement
     return _searchInput;
 }
 
-let _weatherForecastColumn: HTMLDivElement | null = null;
+let _weatherForecastRow: HTMLDivElement | null = null;
 
-export function weatherForecastColumn(): HTMLDivElement
+export function weatherForecastRow(): HTMLDivElement
 {
-    _weatherForecastColumn = document.getElementById("weatherForecastColumn") as HTMLDivElement;
+    _weatherForecastRow = document.getElementById("weatherForecastRow") as HTMLDivElement;
 
-    if ( ! (_weatherForecastColumn instanceof HTMLInputElement))
+    if ( ! (_weatherForecastRow instanceof HTMLInputElement))
     {
-        throw new TypeError(`${searchInput.name}: ${_weatherForecastColumn === null ? "null" : "non " + HTMLDivElement.name} weather forecast column.`);
+        throw new TypeError(`${searchInput.name}: ${_weatherForecastRow === null ? "null" : "non " + HTMLDivElement.name} weather forecast row.`);
     }
 
-    return _weatherForecastColumn;
+    return _weatherForecastRow;
 }
