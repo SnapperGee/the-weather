@@ -113,18 +113,6 @@ export class WeatherForecastCard
         this.#humidityParagraph.textContent = `Humidity: ${this.#humidity} %`;
         return this;
     }
-
-    public show(): WeatherForecastCard
-    {
-        this.#htmlSectionElement.style.display = "block";
-        return this;
-    }
-
-    public hide(): WeatherForecastCard
-    {
-        this.#htmlSectionElement.style.display = "none";
-        return this;
-    }
 }
 
 export function weatherForecastCard( htmlElement: HTMLElement | null,
