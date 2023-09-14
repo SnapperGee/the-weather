@@ -164,6 +164,6 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
 
     weatherForecastRow.style.display = "flex";
 
-    document.getElementById("mainRow")?.classList.remove("justify-content-center");
+    document.getElementById("rootRow")?.classList.remove("justify-content-center");
     document.getElementById("weatherInfoColumn")?.classList.remove("d-none");
 }
