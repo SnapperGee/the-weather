@@ -1,5 +1,12 @@
+/**
+ * @module weather-forecast-api-response
+ */
+
 import { City } from "./cities";
 
+/**
+ * Interface for the minimal amount of information needed from the current weather API call.
+ */
 export interface CurrentWeatherAPIResponse
 {
   name: string,
@@ -23,6 +30,9 @@ export interface CurrentWeatherAPIResponse
   }
 }
 
+/**
+ * Interface for the minimal amount of information needed nested within the weather forecast API call.
+ */
 export interface DailyWeather
 {
     dt_txt: string,
@@ -41,6 +51,9 @@ export interface DailyWeather
     }
 }
 
+/**
+ * Interface for the minimal amount of information needed from the weather forecast API call.
+ */
 export interface WeatherForecastAPIResponse
 {
     city: City,

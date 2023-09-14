@@ -1,6 +1,6 @@
 import { fetchCurrentWeatherData, fetchWeatherForecastData as fetchWeatherForecastData, isRecognizedCityName, isRecognizedCountryName } from "../cities";
 import { Icon, convertKelvinToFahrenheit, createOpenWeatherMapIconSrc, formatDateString } from "../util";
-import { WeatherDayCard } from "../weather-day-card";
+import { CurrentWeatherCard } from "../current-weather-card";
 import { WeatherForecastCard } from "../weather-forecast-card";
 import { formatSearchQuery, isValidSearchFormat } from "./search-query";
 import { createSearchHistoryLIButton } from "./create-search-history-li-button";
@@ -15,7 +15,7 @@ dayjs.extend(tz);
 
 export const searchSubmitEvent = ( submitEvent: SubmitEvent,
                                    htmlInputElement: NonNullable<HTMLInputElement>,
-                                   weatherDayCard: WeatherDayCard,
+                                   weatherDayCard: CurrentWeatherCard,
                                    weatherForecastRow: HTMLDivElement,
                                    weatherForecastCards: WeatherForecastCard[],
                                    htmlUlElement: NonNullable<HTMLUListElement> ): void =>

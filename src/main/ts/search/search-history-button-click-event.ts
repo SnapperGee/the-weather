@@ -1,14 +1,14 @@
 import { fetchCurrentWeatherData, fetchWeatherForecastData } from "../cities";
 import { type Icon, createOpenWeatherMapIconSrc, convertKelvinToFahrenheit, formatDateString } from "../util";
 import { formatSearchQuery } from "./search-query";
-import { WeatherDayCard } from "../weather-day-card";
+import { CurrentWeatherCard } from "../current-weather-card";
 import { WeatherForecastCard } from "../weather-forecast-card";
 import dom from "../dom";
 import dayjs from "dayjs";
 
 export const searchHistoryButtonClickEvent = ( mouseEvent: MouseEvent,
                                                searchFormElement: HTMLFormElement,
-                                               weatherDayCard: WeatherDayCard,
+                                               weatherDayCard: CurrentWeatherCard,
                                                weatherForecastRow: HTMLDivElement,
                                                weatherForecastCards: WeatherForecastCard[] ) =>
 {

@@ -1,6 +1,15 @@
+/**
+ * @module weather-day-card
+ */
+
 import { DEFAULT_ICON_ALT, type Icon } from "./util";
 
-export class WeatherDayCard
+/**
+ * This class is responsible for representing the DOM card element for the current day weather. It contains methods that
+ * make updating its various children's text content easier as well as validates the elements used to construct object
+ * instances
+ */
+export class CurrentWeatherCard
 {
     readonly #htmlSectionElement: HTMLElement;
     #cityName: string;
@@ -16,7 +25,28 @@ export class WeatherDayCard
     readonly #windParagraph: HTMLParagraphElement;
     readonly #humidityParagraph: HTMLParagraphElement;
 
-    public constructor( htmlSectionElement: NonNullable<HTMLElement>,
+    /**
+     * Constructs a {@link CurrentWeatherCard} object instances.
+     *
+     * @param htmlCardElement The root `HTMLElement` of the created card object.
+     *
+     * @param cityName The city name `string` paragraph text content of the created card object.
+     *
+     * @param date The date `string` paragraph text content of the created card object.
+     *
+     * @param icon The `src` and `alt` attribute of the created card object's weather icon img.
+     *
+     * @param temp The temp `number` paragraph text content of the created card object.
+     *
+     * @param windSpeed The wind speed `number` paragraph text content of the created card object.
+     *
+     * @param humidity The humidity `number` paragraph text content of the created card object.
+     *
+     * @returns A newly constructed {@link CurrentWeatherCard} object instance.
+     *
+     * @throws {@link TypeError} if an of the passed arguments are `undefined or `null`.
+     */
+    public constructor( htmlCardElement: NonNullable<HTMLElement>,
                         cityName: NonNullable<string>,
                         date: NonNullable<string>,
                         icon: NonNullable<string | Icon>,
@@ -24,9 +54,9 @@ export class WeatherDayCard
                         windSpeed: NonNullable<number>,
                         humidity: NonNullable<number> )
     {
-        if (htmlSectionElement === undefined || htmlSectionElement === null)
+        if (htmlCardElement === undefined || htmlCardElement === null)
         {
-            throw new TypeError(`${new.target.name}: ${htmlSectionElement} HTML section element.`);
+            throw new TypeError(`${new.target.name}: ${htmlCardElement} HTML section element.`);
         }
 
         if (cityName === undefined || cityName === null)
@@ -59,7 +89,7 @@ export class WeatherDayCard
             throw new TypeError(`${new.target.name}: ${humidity} humidity number.`);
         }
 
-        this.#htmlSectionElement = htmlSectionElement;
+        this.#htmlSectionElement = htmlCardElement;
         this.#cityName = cityName;
         this.#date = date;
         this.#icon = typeof icon === "string" ? {src: icon, alt: DEFAULT_ICON_ALT} : icon;
@@ -86,7 +116,14 @@ export class WeatherDayCard
         this.#humidityParagraph.textContent = `Humidity: ${this.#humidity} %`;
     }
 
-    public cityName(cityName: NonNullable<string>): WeatherDayCard
+    /**
+     * Sets this card's header text content.
+     *
+     * @param cityName The `string` to set this card's header text content to.
+     *
+     * @returns this object instance.
+     */
+    public cityName(cityName: NonNullable<string>): CurrentWeatherCard
     {
         if (cityName === undefined || cityName === null)
         {
@@ -98,7 +135,14 @@ export class WeatherDayCard
         return this;
     }
 
-    public date(date: NonNullable<string>): WeatherDayCard
+    /**
+     * Sets this card's dat paragraph text content.
+     *
+     * @param date The `string` to set this card's date paragraph text content to.
+     *
+     * @returns this object instance.
+     */
+    public date(date: NonNullable<string>): CurrentWeatherCard
     {
         if (date === undefined || date === null)
         {
@@ -110,7 +154,14 @@ export class WeatherDayCard
         return this;
     }
 
-    public icon(icon: NonNullable<string | Icon>): WeatherDayCard
+    /**
+     * Sets this card's weather icon img src and alt attribute.
+     *
+     * @param icon Object containing the src and alt attribute to set this card's img to.
+     *
+     * @returns this object instance.
+     */
+    public icon(icon: NonNullable<string | Icon>): CurrentWeatherCard
     {
         if (icon === undefined || icon === null)
         {
@@ -123,7 +174,14 @@ export class WeatherDayCard
         return this;
     }
 
-    public temp(temp: NonNullable<number>): WeatherDayCard
+    /**
+     * Sets this card's temp paragraph text content.
+     *
+     * @param date The `number` to set this card's temp paragraph text content to.
+     *
+     * @returns this object instance.
+     */
+    public temp(temp: NonNullable<number>): CurrentWeatherCard
     {
         if (temp === undefined || temp === null)
         {
@@ -135,7 +193,14 @@ export class WeatherDayCard
         return this;
     }
 
-    public windSpeed(windSpeed: NonNullable<number>): WeatherDayCard
+    /**
+     * Sets this card's wind speed paragraph text content.
+     *
+     * @param date The `number` to set this card's wind speed paragraph text content to.
+     *
+     * @returns this object instance.
+     */
+    public windSpeed(windSpeed: NonNullable<number>): CurrentWeatherCard
     {
         if (windSpeed === undefined || windSpeed === null)
         {
@@ -147,7 +212,14 @@ export class WeatherDayCard
         return this;
     }
 
-    public humidity(humidity: NonNullable<number>): WeatherDayCard
+    /**
+     * Sets this card's humidity paragraph text content.
+     *
+     * @param date The `number` to set this card's humidity paragraph text content to.
+     *
+     * @returns this object instance.
+     */
+    public humidity(humidity: NonNullable<number>): CurrentWeatherCard
     {
         if (humidity === undefined || humidity === null)
         {
@@ -158,33 +230,64 @@ export class WeatherDayCard
         return this;
     }
 
-    public show(): WeatherDayCard
+    /**
+     * Makes this card visible in the viewport.
+     *
+     * @returns this object instance.
+     */
+    public show(): CurrentWeatherCard
     {
         this.#htmlSectionElement.classList.remove("d-none");
         return this;
     }
 
-    public hide(): WeatherDayCard
+    /**
+     * Makes this card hidden in the viewport.
+     *
+     * @returns this object instance.
+     */
+    public hide(): CurrentWeatherCard
     {
         this.#htmlSectionElement.classList.add("d-none");
         return this;
     }
 }
 
-export function weatherDayCard( htmlElement: HTMLElement | null,
+/**
+ * Factory method to create {@link CurrentWeatherCard} object instances.
+ *
+ * @param htmlCardElement The root `HTMLElement` of the created card object.
+ *
+ * @param cityName The city name `string` paragraph text content of the created card object.
+ *
+ * @param date The date `string` paragraph text content of the created card object.
+ *
+ * @param icon The `src` and `alt` attribute of the created card object's weather icon img.
+ *
+ * @param temp The temp `number` paragraph text content of the created card object.
+ *
+ * @param windSpeed The wind speed `number` paragraph text content of the created card object.
+ *
+ * @param humidity The humidity `number` paragraph text content of the created card object.
+ *
+ * @returns A newly constructed {@link CurrentWeatherCard} object instance.
+ *
+ * @throws {@link TypeError} if the passed root `HTMLElement` is `undefined or `null`.
+ */
+export function currentWeatherCard( htmlCardElement: HTMLElement | null,
                                 cityName: string,
                                 date: string,
                                 icon: string | Icon,
                                 temp: number,
                                 windSpeed: number,
-                                humidity: number ): WeatherDayCard
+                                humidity: number ): CurrentWeatherCard
 {
-    if (htmlElement === undefined || htmlElement === null)
+    if (htmlCardElement === undefined || htmlCardElement === null)
     {
-        throw new TypeError(`${weatherDayCard.name}: ${htmlElement} HTML element.`);
+        throw new TypeError(`${currentWeatherCard.name}: ${htmlCardElement} HTML element.`);
     }
 
-    return new WeatherDayCard(htmlElement, cityName, date, icon, temp, windSpeed, humidity);
+    return new CurrentWeatherCard(htmlCardElement, cityName, date, icon, temp, windSpeed, humidity);
 }
 
-export default weatherDayCard;
+export default currentWeatherCard;

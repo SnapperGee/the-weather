@@ -1,5 +1,13 @@
+/**
+ * @module dom
+ */
+
 let _rootRow: HTMLDivElement | null = null;
 
+/**
+ * Retrieves a reference to the root row DOM `HTMLDivElement`.
+ * @returns The root row `HTMLDivElement`.
+ */
 export function rootRow(): HTMLDivElement
 {
     _rootRow = document.getElementById("rootRow") as HTMLDivElement;
@@ -14,6 +22,10 @@ export function rootRow(): HTMLDivElement
 
 let _weatherInfoColumn: HTMLDivElement | null = null;
 
+/**
+ * Retrieves a reference to the weather info column DOM `HTMLDivElement`.
+ * @returns The weather info column `HTMLDivElement`.
+ */
 export function weatherInfoColumn(): HTMLDivElement
 {
     _weatherInfoColumn = document.getElementById("weatherInfoColumn") as HTMLDivElement;
@@ -28,13 +40,17 @@ export function weatherInfoColumn(): HTMLDivElement
 
 let _weatherDayCard: HTMLDivElement | null = null;
 
-export function weatherDayCard(): HTMLDivElement
+/**
+ * Retrieves a reference to the weather day card DOM `HTMLDivElement`.
+ * @returns The weather day card `HTMLDivElement`.
+ */
+export function currentWeatherCard(): HTMLDivElement
 {
-    _weatherDayCard = document.getElementById("weatherDayCard") as HTMLDivElement;
+    _weatherDayCard = document.getElementById("currentWeatherCard") as HTMLDivElement;
 
     if ( ! (_weatherDayCard instanceof HTMLDivElement))
     {
-        throw new TypeError(`${weatherDayCard.name}: ${_weatherDayCard === null ? "null" : "non " + HTMLDivElement.name} weather day card.`);
+        throw new TypeError(`${currentWeatherCard.name}: ${_weatherDayCard === null ? "null" : "non " + HTMLDivElement.name} weather day card.`);
     }
 
     return _weatherDayCard;
@@ -125,7 +141,7 @@ export function weatherForecastRow(): HTMLDivElement
 export default {
     rootRow: Object.freeze(() => rootRow()),
     weatherInfoColumn: Object.freeze(() => weatherInfoColumn()),
-    weatherDayCard: Object.freeze(() => weatherDayCard()),
+    currentWeatherCard: Object.freeze(() => currentWeatherCard()),
     weatherForecastColumns: Object.freeze((): HTMLCollectionOf<HTMLElement> => weatherForecastColumns()),
     searchForm: Object.freeze((): HTMLFormElement => searchForm()),
     searchHistoryButtonList: Object.freeze(():HTMLUListElement => searchHistoryButtonList()),
