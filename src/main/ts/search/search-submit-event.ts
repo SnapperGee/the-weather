@@ -144,16 +144,29 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
             localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArray));
 
             // Get search history LI Buttons
-            const searchHistoryListItems = dom.searchHistoryLIButtons();
+            const searchHistoryListItemButtons = Array.from(dom.searchHistoryLIButtons());
 
-            // If there's a pre-existing history search button, move it to the top of the search history buttons list.
-            Array.from(searchHistoryListItems).forEach(searchHistoryListItem =>{
-                const searchHistoryButton = searchHistoryListItem.querySelector("button");
-                if (searchHistoryButton?.textContent?.localeCompare(prettySearchString, undefined, {sensitivity: "base"}) === 0)
-                {
-                    htmlUlElement.prepend(searchHistoryListItem);
-                }
-            });
+            // LI Button to prepend to search history LI Buttons list
+            let liButtonItem: HTMLLIElement | undefined = undefined;
+
+            // If there's a pre-existing LI search history button, use it as the button to prepend to search history
+            // button list, otherwise create new search history button to prepend to search history button list.
+            if ( (liButtonItem = searchHistoryListItemButtons.find(searchHistoryLIButton => searchHistoryLIButton.querySelector("button")?.textContent?.localeCompare(prettySearchString, undefined, {sensitivity: "base"}) === 0)) === undefined )
+            {
+                const newSearchHistoryButton = createSearchHistoryLIButton(prettySearchString);
+
+                newSearchHistoryButton.addEventListener("click", event => searchHistoryButtonClickEvent(
+                    event,
+                    dom.searchForm(),
+                    currentWeatherCard,
+                    weatherForecastRow,
+                    weatherForecastCards
+                ));
+
+                liButtonItem = newSearchHistoryButton;
+            }
+
+            htmlUlElement.prepend(liButtonItem);
         }
     );
 
