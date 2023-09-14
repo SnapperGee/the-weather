@@ -3,7 +3,7 @@ import { type WeatherForecastCard, weatherForecastCard } from "./weather-forecas
 import { searchSubmitEvent } from "./search/search-submit-event";
 import { createSearchHistoryLIButton } from "./search/create-search-history-li-button";
 import { searchHistoryButtonClickEvent } from "./search/search-history-button-click-event";
-import { searchInput, weatherForecastColumns } from "./dom";
+import { searchForm, searchInput, weatherForecastColumns } from "./dom";
 
 const weatherDayCard: WeatherDayCard = createWeatherDayCard(
     document.getElementById("weatherDayCard"),
@@ -35,8 +35,6 @@ const weatherForecastCard5: WeatherForecastCard = weatherForecastCard(
     "", "", 0, 0, 0
 );
 
-const searchForm = document.getElementById("searchForm");
-
 const searchHistoryUlElement = document.getElementById("citySearchHistoryList");
 
 const searchHistoryButtons = document.createDocumentFragment();
@@ -50,7 +48,7 @@ searchHistoryStringArray.forEach(searchHistoryString => {
     const searchHistoryLIButton = createSearchHistoryLIButton(searchHistoryString);
 
     searchHistoryLIButton.addEventListener("click", event => searchHistoryButtonClickEvent( event,
-                                            searchForm as HTMLFormElement,
+                                            searchForm(),
                                             weatherDayCard,
                                             weatherForecastRow,
                                             [weatherForecastCard1, weatherForecastCard2, weatherForecastCard3, weatherForecastCard4, weatherForecastCard5] ))
@@ -62,7 +60,7 @@ searchHistoryUlElement?.appendChild(searchHistoryButtons);
 
 const citySearchHistoryUlElement = document.getElementById("citySearchHistoryList") as HTMLUListElement;
 
-searchForm?.addEventListener("submit", event => { searchSubmitEvent(
+searchForm().addEventListener("submit", event => { searchSubmitEvent(
     event,
     searchInput(),
     weatherDayCard,
