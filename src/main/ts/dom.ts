@@ -1,3 +1,31 @@
+let _rootRow: HTMLDivElement | null = null;
+
+export function rootRow(): HTMLDivElement
+{
+    _rootRow = document.getElementById("rootRow") as HTMLDivElement;
+
+    if ( ! (_rootRow instanceof HTMLDivElement))
+    {
+        throw new TypeError(`${rootRow.name}: ${_rootRow === null ? "null" : "non " + HTMLDivElement.name} root row.`);
+    }
+
+    return _rootRow;
+}
+
+let _weatherInfoColumn: HTMLDivElement | null = null;
+
+export function weatherInfoColumn(): HTMLDivElement
+{
+    _weatherInfoColumn = document.getElementById("weatherInfoColumn") as HTMLDivElement;
+
+    if ( ! (_weatherInfoColumn instanceof HTMLDivElement))
+    {
+        throw new TypeError(`${weatherInfoColumn.name}: ${_weatherInfoColumn === null ? "null" : "non " + HTMLDivElement.name} weather info column.`);
+    }
+
+    return _weatherInfoColumn;
+}
+
 let _weatherForecastColumns: HTMLCollectionOf<HTMLElement> | null = null;
 
 export const weatherForecastColumns = (): HTMLCollectionOf<HTMLElement> =>
@@ -81,6 +109,8 @@ export function weatherForecastRow(): HTMLDivElement
 }
 
 export default {
+    rootRow: Object.freeze(() => rootRow()),
+    weatherInfoColumn: Object.freeze(() => weatherInfoColumn()),
     weatherForecastColumns: Object.freeze((): HTMLCollectionOf<HTMLElement> => weatherForecastColumns()),
     searchForm: Object.freeze((): HTMLFormElement => searchForm()),
     searchHistoryButtonList: Object.freeze(():HTMLUListElement => searchHistoryButtonList()),

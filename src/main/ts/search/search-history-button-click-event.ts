@@ -3,6 +3,7 @@ import { type Icon, createOpenWeatherMapIconSrc, convertKelvinToFahrenheit, form
 import { formatSearchQuery } from "./search-query";
 import { WeatherDayCard } from "../weather-day-card";
 import { WeatherForecastCard } from "../weather-forecast-card";
+import dom from "../dom";
 import dayjs from "dayjs";
 
 export const searchHistoryButtonClickEvent = ( mouseEvent: MouseEvent,
@@ -85,8 +86,8 @@ export const searchHistoryButtonClickEvent = ( mouseEvent: MouseEvent,
         weatherForecastRow.classList.remove("d-none");
     }
 
-    document.getElementById("rootRow")?.classList.remove("justify-content-center");
-    document.getElementById("weatherInfoColumn")?.classList.remove("d-none");
+    dom.rootRow().classList.remove("justify-content-center");
+    dom.weatherInfoColumn().classList.remove("d-none");
 };
 
 export default searchHistoryButtonClickEvent;

@@ -3,11 +3,12 @@ import { Icon, convertKelvinToFahrenheit, createOpenWeatherMapIconSrc, formatDat
 import { WeatherDayCard } from "../weather-day-card";
 import { WeatherForecastCard } from "../weather-forecast-card";
 import { formatSearchQuery, isValidSearchFormat } from "./search-query";
+import { createSearchHistoryLIButton } from "./create-search-history-li-button";
+import { searchHistoryButtonClickEvent } from "./search-history-button-click-event";
+import dom from "../dom";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import tz from "dayjs/plugin/timezone";
-import { createSearchHistoryLIButton } from "./create-search-history-li-button";
-import searchHistoryButtonClickEvent from "./search-history-button-click-event";
 
 dayjs.extend(utc);
 dayjs.extend(tz);
@@ -164,6 +165,6 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
 
     weatherForecastRow.classList.remove("d-none");
 
-    document.getElementById("rootRow")?.classList.remove("justify-content-center");
-    document.getElementById("weatherInfoColumn")?.classList.remove("d-none");
+    dom.rootRow().classList.remove("justify-content-center");
+    dom.weatherInfoColumn().classList.remove("d-none");
 }
