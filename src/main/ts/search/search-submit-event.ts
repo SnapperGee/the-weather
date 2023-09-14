@@ -213,6 +213,7 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
         }
     );
 
+    // Show weather forecast row with updated values
     weatherForecastRow.classList.remove("d-none");
 
     // Remove bootstrap classes for initial page layout if this is the first city search query.
