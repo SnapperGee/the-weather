@@ -36,7 +36,7 @@ const weatherForecastCard5: WeatherForecastCard = weatherForecastCard(
     "", "", 0, 0, 0
 );
 
-const searchHistoryForm = document.querySelector("form");
+const searchForm = document.getElementById("searchForm");
 
 const searchHistoryUlElement = document.getElementById("citySearchHistoryList");
 
@@ -50,7 +50,7 @@ searchHistoryStringArray.forEach(searchHistoryString => {
     const searchHistoryLIButton = createSearchHistoryLIButton(searchHistoryString);
 
     searchHistoryLIButton.addEventListener("click", event => searchHistoryButtonClickEvent( event,
-                                            searchHistoryForm!,
+                                            searchForm as HTMLFormElement,
                                             weatherDayCard,
                                             weatherForecastHeader!,
                                             [weatherForecastCard1, weatherForecastCard2, weatherForecastCard3, weatherForecastCard4, weatherForecastCard5] ))
@@ -61,11 +61,10 @@ searchHistoryStringArray.forEach(searchHistoryString => {
 searchHistoryUlElement?.appendChild(searchHistoryButtons);
 
 const searchCityInput = document.getElementById("searchInput") as HTMLInputElement;
-const searchCityForm = document.getElementById("searchForm");
 const citySearchHistoryUlElement = document.getElementById("citySearchHistoryList") as HTMLUListElement;
 const weatherForecastHeader = document.getElementById("forecastHeaderRow");
 
-searchCityForm?.addEventListener("submit", event => { searchSubmitEvent(
+searchForm?.addEventListener("submit", event => { searchSubmitEvent(
     event,
     searchCityInput,
     weatherDayCard,
