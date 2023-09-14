@@ -3,7 +3,7 @@ import { type WeatherForecastCard, weatherForecastCard } from "./weather-forecas
 import { searchSubmitEvent } from "./search/search-submit-event";
 import { createSearchHistoryLIButton } from "./search/create-search-history-li-button";
 import { searchHistoryButtonClickEvent } from "./search/search-history-button-click-event";
-import { searchForm, searchInput, weatherForecastColumns, weatherForecastRow } from "./dom";
+import { searchForm, searchHistoryButtonList, searchInput, weatherForecastColumns, weatherForecastRow } from "./dom";
 
 const weatherDayCard: WeatherDayCard = createWeatherDayCard(
     document.getElementById("weatherDayCard"),
@@ -53,9 +53,7 @@ searchHistoryStringArray.forEach(searchHistoryString => {
     searchHistoryButtons.appendChild(searchHistoryLIButton);
 });
 
-const searchHistoryButtonList = document.getElementById("searchHistoryButtonList");
-
-searchHistoryButtonList?.appendChild(searchHistoryButtons);
+searchHistoryButtonList().appendChild(searchHistoryButtons);
 
 searchForm().addEventListener("submit", event => { searchSubmitEvent(
     event,
@@ -66,5 +64,5 @@ searchForm().addEventListener("submit", event => { searchSubmitEvent(
         weatherForecastCard1, weatherForecastCard2, weatherForecastCard3,
         weatherForecastCard4, weatherForecastCard5
     ],
-    searchHistoryButtonList as HTMLUListElement)
+    searchHistoryButtonList())
 });
