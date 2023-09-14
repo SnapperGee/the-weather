@@ -33,111 +33,97 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
 
     const searchQueryString = htmlInputElement.value;
 
-    if ( ! isValidSearchFormat(searchQueryString))
-    {
-        // console.log(`Invalid search query string format: "${searchQueryString}". city name, [county] expected.`);
-        alert(`Invalid search query string format: "${searchQueryString}". A city name followed by a comma and 2 letter country name expected.`);
-        return;
-    }
-
     const formattedSearchQuery =   searchQueryString.includes(",")
                                  ? formatSearchQuery(searchQueryString.split(","))
                                  : formatSearchQuery(searchQueryString);
 
-    if (typeof formattedSearchQuery === "string")
+    if ( ! isValidSearchFormat(searchQueryString) || typeof formattedSearchQuery === "string")
     {
-        if ( ! isRecognizedCityName(formattedSearchQuery))
-        {
-            // console.log(`Unrecognized city name: "${searchQueryString}"`);
-            alert(`Unrecognized city name: "${searchQueryString}"`);
-            return;
-        }
+        alert(`Invalid search query string format: "${searchQueryString}".\n\nA city name followed by a comma and 2 letter country name expected such as:\n\n San Francisco, US`);
+        return;
     }
-    else
+
+    if ( ! isRecognizedCityName(formattedSearchQuery[0]))
     {
-        if ( ! isRecognizedCityName(formattedSearchQuery[0]))
+        alert(`Unrecognized city name: "${formattedSearchQuery[0]}"`);
+        return;
+    }
+
+    if ( ! isRecognizedCountryName(formattedSearchQuery[1]))
+    {
+        alert(`Unrecognized country name: "${formattedSearchQuery[1]}"`);
+        return;
+    }
+
+    const searchHistoryString: string | null = localStorage.getItem("searchHistory");
+
+    const searchHistoryArray: string[] = searchHistoryString !== null ? JSON.parse(searchHistoryString) : [];
+
+    fetchCurrentWeatherData(formattedSearchQuery[0], formattedSearchQuery[1])
+        .then(currentWeather =>
         {
-            // console.log(`Unrecognized city name: "${formattedSearchQuery[0]}"`);
-            alert(`Unrecognized city name: "${formattedSearchQuery[0]}"`);
-            return;
-        }
+            // Get current time
+            const now = dayjs().utc().tz(dayjs.tz.guess());
 
-        if ( ! isRecognizedCountryName(formattedSearchQuery[1]))
-        {
-            // console.log(`Unrecognized country name: "${formattedSearchQuery[1]}"`);
-            alert(`Unrecognized country name: "${formattedSearchQuery[1]}"`);
-            return;
-        }
+            // Current date to display in header
+            const currentDayString = now.format("MM/DD/YYYY");
 
-        const searchHistoryString: string | null = localStorage.getItem("searchHistory");
+            const cityName = currentWeather.name;
+            const dt_txt = currentDayString;
+            const icon: Icon = {src: createOpenWeatherMapIconSrc(currentWeather.weather[0].icon), alt: `${currentWeather.weather[0].description} icon`};
+            const temp = convertKelvinToFahrenheit(currentWeather.main.temp);
+            const windSpeed = currentWeather.wind.speed;
+            const humidity = currentWeather.main.humidity;
 
-        const searchHistoryArray: string[] = searchHistoryString !== null ? JSON.parse(searchHistoryString) : [];
+            weatherDayCard.hide();
 
-        fetchCurrentWeatherData(formattedSearchQuery[0], formattedSearchQuery[1])
-            .then(currentWeather =>
+            weatherDayCard.cityName(cityName)
+                            .date(dt_txt)
+                            .icon(icon)
+                            .temp(temp)
+                            .windSpeed(windSpeed)
+                            .humidity(humidity);
+
+            weatherDayCard.show();
+
+            const prettySearchString = formattedSearchQuery.join(", ");
+
+            const preExistingSearchHistoryIndex = searchHistoryArray.findIndex(preExistingSearchHistoryString => prettySearchString.localeCompare(preExistingSearchHistoryString, undefined, {sensitivity: "base"}) === 0);
+
+            if (preExistingSearchHistoryIndex !== -1)
             {
-                // Get current time
-                const now = dayjs().utc().tz(dayjs.tz.guess());
-
-                // Current date to display in header
-                const currentDayString = now.format("MM/DD/YYYY");
-
-                const cityName = currentWeather.name;
-                const dt_txt = currentDayString;
-                const icon: Icon = {src: createOpenWeatherMapIconSrc(currentWeather.weather[0].icon), alt: `${currentWeather.weather[0].description} icon`};
-                const temp = convertKelvinToFahrenheit(currentWeather.main.temp);
-                const windSpeed = currentWeather.wind.speed;
-                const humidity = currentWeather.main.humidity;
-
-                weatherDayCard.hide();
-
-                weatherDayCard.cityName(cityName)
-                              .date(dt_txt)
-                              .icon(icon)
-                              .temp(temp)
-                              .windSpeed(windSpeed)
-                              .humidity(humidity);
-
-                weatherDayCard.show();
-
-                const prettySearchString = formattedSearchQuery.join(", ");
-
-                const preExistingSearchHistoryIndex = searchHistoryArray.findIndex(preExistingSearchHistoryString => prettySearchString.localeCompare(preExistingSearchHistoryString, undefined, {sensitivity: "base"}) === 0);
-
-                if (preExistingSearchHistoryIndex !== -1)
-                {
-                    searchHistoryArray.splice(preExistingSearchHistoryIndex, 1);
-                }
-                else if (searchHistoryArray.length >= 20)
-                {
-                    searchHistoryArray.pop();
-                }
-
-                searchHistoryArray.unshift(prettySearchString);
-
-                localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArray));
-
-                const searchHistoryListItems = htmlUlElement.querySelectorAll("li");
-
-                Array.from(searchHistoryListItems).forEach(searchHistoryListItem =>{
-                    const searchHistoryButton = searchHistoryListItem.querySelector("button");
-                    if (searchHistoryButton?.textContent?.localeCompare(prettySearchString, undefined, {sensitivity: "base"}) === 0)
-                    {
-                        searchHistoryListItem.remove();
-                    }
-                });
-
-                const newSearchHistoryLIButton = createSearchHistoryLIButton(prettySearchString);
-
-                newSearchHistoryLIButton.addEventListener("click", event => searchHistoryButtonClickEvent( event,
-                                                                                                           submitEvent.target as HTMLFormElement,
-                                                                                                           weatherDayCard,
-                                                                                                           weatherForecastHeader,
-                                                                                                           weatherForecastCards ))
-
-                htmlUlElement.prepend(newSearchHistoryLIButton);
+                searchHistoryArray.splice(preExistingSearchHistoryIndex, 1);
             }
-        );
+            else if (searchHistoryArray.length >= 20)
+            {
+                searchHistoryArray.pop();
+            }
+
+            searchHistoryArray.unshift(prettySearchString);
+
+            localStorage.setItem("searchHistory", JSON.stringify(searchHistoryArray));
+
+            const searchHistoryListItems = htmlUlElement.querySelectorAll("li");
+
+            Array.from(searchHistoryListItems).forEach(searchHistoryListItem =>{
+                const searchHistoryButton = searchHistoryListItem.querySelector("button");
+                if (searchHistoryButton?.textContent?.localeCompare(prettySearchString, undefined, {sensitivity: "base"}) === 0)
+                {
+                    searchHistoryListItem.remove();
+                }
+            });
+
+            const newSearchHistoryLIButton = createSearchHistoryLIButton(prettySearchString);
+
+            newSearchHistoryLIButton.addEventListener("click", event => searchHistoryButtonClickEvent( event,
+                                                                                                        submitEvent.target as HTMLFormElement,
+                                                                                                        weatherDayCard,
+                                                                                                        weatherForecastHeader,
+                                                                                                        weatherForecastCards ))
+
+            htmlUlElement.prepend(newSearchHistoryLIButton);
+        }
+    );
 
         fetchWeatherForecastData(formattedSearchQuery[0], formattedSearchQuery[1])
             .then(weatherForecast =>
@@ -176,6 +162,4 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
                 weatherForecastHeader.style.display = "block";
             }
         );
-
-    }
 }
