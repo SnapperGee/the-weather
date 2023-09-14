@@ -58,6 +58,10 @@ export function currentWeatherCard(): HTMLDivElement
 
 let _weatherForecastColumns: HTMLCollectionOf<HTMLElement> | null = null;
 
+/**
+ * Retrieves a reference to the weather forecast column DOM `HTMLDivElement`s.
+ * @returns The weather forecast column `HTMLDivElement`s.
+ */
 export const weatherForecastColumns = (): HTMLCollectionOf<HTMLElement> =>
 {
     if (_weatherForecastColumns === null)
@@ -75,6 +79,10 @@ export const weatherForecastColumns = (): HTMLCollectionOf<HTMLElement> =>
 
 let _searchForm: HTMLFormElement | null = null;
 
+/**
+ * Retrieves a reference to the search city DOM `HTMLFormElement`.
+ * @returns The search city `HTMLFormElement`.
+ */
 export function searchForm(): HTMLFormElement
 {
     if (_searchForm === null)
@@ -92,6 +100,10 @@ export function searchForm(): HTMLFormElement
 
 let _searchHistoryButtonList: HTMLUListElement | null = null;
 
+/**
+ * Retrieves a reference to the search history buttons DOM `HTMLUListElement`.
+ * @returns The search history buttons `HTMLUListElement`.
+ */
 export function searchHistoryButtonList(): HTMLUListElement
 {
     if (_searchHistoryButtonList === null)
@@ -109,6 +121,10 @@ export function searchHistoryButtonList(): HTMLUListElement
 
 let _searchInput: HTMLInputElement | null = null;
 
+/**
+ * Retrieves a reference to the search city input text DOM `HTMLInputElement`.
+ * @returns The search city input text `HTMLInputElement`.
+ */
 export function searchInput(): HTMLInputElement
 {
     if (_searchInput === null)
@@ -126,6 +142,10 @@ export function searchInput(): HTMLInputElement
 
 let _weatherForecastRow: HTMLDivElement | null = null;
 
+/**
+ * Retrieves a reference to the weather forecast row DOM `HTMLDivElement`.
+ * @returns The weather forecast row `HTMLDivElement`.
+ */
 export function weatherForecastRow(): HTMLDivElement
 {
     _weatherForecastRow = document.getElementById("weatherForecastRow") as HTMLDivElement;
