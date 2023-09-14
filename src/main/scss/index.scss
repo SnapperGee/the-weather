@@ -29,3 +29,7 @@ main {
 #weatherDayCard, #weatherForecastRow {
     display: none;
 }
+
+.weatherForecastColumn > .card {
+    width: 10rem;
+}
