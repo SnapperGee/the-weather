@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 export const searchHistoryButtonClickEvent = ( mouseEvent: MouseEvent,
                                                searchFormElement: HTMLFormElement,
                                                weatherDayCard: WeatherDayCard,
-                                               weatherForecastHeader: HTMLElement,
+                                               weatherForecastRow: HTMLDivElement,
                                                weatherForecastCards: WeatherForecastCard[] ) =>
 {
     if (mouseEvent.target instanceof HTMLButtonElement)
@@ -47,6 +47,8 @@ export const searchHistoryButtonClickEvent = ( mouseEvent: MouseEvent,
             }
         );
 
+        weatherForecastRow.style.display = "none";
+
         fetchWeatherForecastData(formattedSearchQuery[0], formattedSearchQuery[1])
             .then(weatherForecast =>
             {
@@ -70,20 +72,17 @@ export const searchHistoryButtonClickEvent = ( mouseEvent: MouseEvent,
 
                     const weatherForecastCard = weatherForecastCards[index];
 
-                    weatherForecastCard.hide();
-
                     weatherForecastCard.date(dt_txt);
                     weatherForecastCard.icon(icon);
                     weatherForecastCard.temp(temp);
                     weatherForecastCard.windSpeed(windSpeed);
                     weatherForecastCard.humidity(humidity);
-
-                    weatherForecastCard.show();
                 }
 
-                weatherForecastHeader.style.display = "block";
             }
         );
+
+        weatherForecastRow.style.display = "flex";
     }
 
     document.getElementById("mainRow")?.classList.remove("justify-content-center");

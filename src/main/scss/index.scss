@@ -26,6 +26,6 @@ main {
     height: calc(100% - $headerHeight);
 }
 
-#weatherDayCard, #forecastHeaderRow, .weatherForecastColumn {
+#weatherDayCard, #weatherForecastRow {
     display: none;
 }

@@ -15,7 +15,7 @@ dayjs.extend(tz);
 export const searchSubmitEvent = ( submitEvent: SubmitEvent,
                                    htmlInputElement: NonNullable<HTMLInputElement>,
                                    weatherDayCard: WeatherDayCard,
-                                   weatherForecastHeader: HTMLElement,
+                                   weatherForecastRow: HTMLDivElement,
                                    weatherForecastCards: WeatherForecastCard[],
                                    htmlUlElement: NonNullable<HTMLUListElement> ): void =>
 {
@@ -120,12 +120,14 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
             newSearchHistoryLIButton.addEventListener("click", event => searchHistoryButtonClickEvent( event,
                                                                                                         submitEvent.target as HTMLFormElement,
                                                                                                         weatherDayCard,
-                                                                                                        weatherForecastHeader,
+                                                                                                        weatherForecastRow,
                                                                                                         weatherForecastCards ))
 
             htmlUlElement.prepend(newSearchHistoryLIButton);
         }
     );
+
+    weatherForecastRow.style.display = "none";
 
     fetchWeatherForecastData(formattedSearchQuery[0], formattedSearchQuery[1])
         .then(weatherForecast =>
@@ -150,20 +152,17 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
 
                 const weatherForecastCard = weatherForecastCards[index];
 
-                weatherForecastCard.hide();
-
                 weatherForecastCard.date(dt_txt);
                 weatherForecastCard.icon(icon);
                 weatherForecastCard.temp(temp);
                 weatherForecastCard.windSpeed(windSpeed);
                 weatherForecastCard.humidity(humidity);
-
-                weatherForecastCard.show();
             }
 
-            weatherForecastHeader.style.display = "block";
         }
     );
+
+    weatherForecastRow.style.display = "flex";
 
     document.getElementById("mainRow")?.classList.remove("justify-content-center");
     document.getElementById("weatherInfoColumn")?.classList.remove("d-none");

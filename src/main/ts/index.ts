@@ -45,13 +45,14 @@ const searchHistoryString: string | null = localStorage.getItem("searchHistory")
 
 const searchHistoryStringArray: readonly string[] = searchHistoryString !== null ? JSON.parse(searchHistoryString) : [];
 
+const weatherForecastRow = document.getElementById("weatherForecastRow") as HTMLDivElement;
 searchHistoryStringArray.forEach(searchHistoryString => {
     const searchHistoryLIButton = createSearchHistoryLIButton(searchHistoryString);
 
     searchHistoryLIButton.addEventListener("click", event => searchHistoryButtonClickEvent( event,
                                             searchForm as HTMLFormElement,
                                             weatherDayCard,
-                                            weatherForecastHeader!,
+                                            weatherForecastRow,
                                             [weatherForecastCard1, weatherForecastCard2, weatherForecastCard3, weatherForecastCard4, weatherForecastCard5] ))
 
     searchHistoryButtons.appendChild(searchHistoryLIButton);
@@ -60,13 +61,12 @@ searchHistoryStringArray.forEach(searchHistoryString => {
 searchHistoryUlElement?.appendChild(searchHistoryButtons);
 
 const citySearchHistoryUlElement = document.getElementById("citySearchHistoryList") as HTMLUListElement;
-const weatherForecastHeader = document.getElementById("forecastHeaderRow");
 
 searchForm?.addEventListener("submit", event => { searchSubmitEvent(
     event,
     searchInput(),
     weatherDayCard,
-    weatherForecastHeader!,
+    weatherForecastRow,
     [
         weatherForecastCard1, weatherForecastCard2, weatherForecastCard3,
         weatherForecastCard4, weatherForecastCard5
