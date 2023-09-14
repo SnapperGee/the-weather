@@ -125,41 +125,44 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
         }
     );
 
-        fetchWeatherForecastData(formattedSearchQuery[0], formattedSearchQuery[1])
-            .then(weatherForecast =>
+    fetchWeatherForecastData(formattedSearchQuery[0], formattedSearchQuery[1])
+        .then(weatherForecast =>
+        {
+            const weatherForecastDays = Object.freeze([
+                weatherForecast.list[5],
+                weatherForecast.list[13],
+                weatherForecast.list[21],
+                weatherForecast.list[29],
+                weatherForecast.list[37]
+            ]);
+
+            for (const index in weatherForecastDays)
             {
-                const weatherForecastDays = Object.freeze([
-                    weatherForecast.list[5],
-                    weatherForecast.list[13],
-                    weatherForecast.list[21],
-                    weatherForecast.list[29],
-                    weatherForecast.list[37]
-                ]);
+                const weatherForecastData = weatherForecastDays[index];
 
-                for (const index in weatherForecastDays)
-                {
-                    const weatherForecastData = weatherForecastDays[index];
+                const dt_txt = formatDateString(weatherForecastData.dt_txt);
+                const icon: Icon = {src: createOpenWeatherMapIconSrc(weatherForecastData.weather[0].icon), alt: `${weatherForecastData.weather[0].description} icon`};
+                const temp = convertKelvinToFahrenheit(weatherForecastData.main.temp);
+                const windSpeed = weatherForecastData.wind.speed;
+                const humidity = weatherForecastData.main.humidity;
 
-                    const dt_txt = formatDateString(weatherForecastData.dt_txt);
-                    const icon: Icon = {src: createOpenWeatherMapIconSrc(weatherForecastData.weather[0].icon), alt: `${weatherForecastData.weather[0].description} icon`};
-                    const temp = convertKelvinToFahrenheit(weatherForecastData.main.temp);
-                    const windSpeed = weatherForecastData.wind.speed;
-                    const humidity = weatherForecastData.main.humidity;
+                const weatherForecastCard = weatherForecastCards[index];
 
-                    const weatherForecastCard = weatherForecastCards[index];
+                weatherForecastCard.hide();
 
-                    weatherForecastCard.hide();
+                weatherForecastCard.date(dt_txt);
+                weatherForecastCard.icon(icon);
+                weatherForecastCard.temp(temp);
+                weatherForecastCard.windSpeed(windSpeed);
+                weatherForecastCard.humidity(humidity);
 
-                    weatherForecastCard.date(dt_txt);
-                    weatherForecastCard.icon(icon);
-                    weatherForecastCard.temp(temp);
-                    weatherForecastCard.windSpeed(windSpeed);
-                    weatherForecastCard.humidity(humidity);
-
-                    weatherForecastCard.show();
-                }
-
-                weatherForecastHeader.style.display = "block";
+                weatherForecastCard.show();
             }
-        );
+
+            weatherForecastHeader.style.display = "block";
+        }
+    );
+
+    document.getElementById("mainRow")?.classList.remove("justify-content-center");
+    document.getElementById("weatherInfoColumn")?.classList.remove("d-none");
 }

@@ -85,6 +85,9 @@ export const searchHistoryButtonClickEvent = ( mouseEvent: MouseEvent,
             }
         );
     }
+
+    document.getElementById("mainRow")?.classList.remove("justify-content-center");
+    document.getElementById("weatherInfoColumn")?.classList.remove("d-none");
 };
 
 export default searchHistoryButtonClickEvent;
