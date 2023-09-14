@@ -18,10 +18,6 @@ export const searchHistoryButtonClickEvent = ( mouseEvent: MouseEvent,
 
         const formattedSearchQuery = formatSearchQuery(mouseEvent.target.textContent!.split(", "));
 
-        const searchHistoryString: string | null = localStorage.getItem("searchHistory");
-
-        const searchHistoryArray: string[] = searchHistoryString !== null ? JSON.parse(searchHistoryString) : [];
-
         fetchCurrentWeatherData(formattedSearchQuery[0], formattedSearchQuery[1])
             .then(currentWeather =>
             {
