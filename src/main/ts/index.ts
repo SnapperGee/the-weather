@@ -3,8 +3,7 @@ import { type WeatherForecastCard, weatherForecastCard } from "./weather-forecas
 import { searchSubmitEvent } from "./search/search-submit-event";
 import { createSearchHistoryLIButton } from "./search/create-search-history-li-button";
 import { searchHistoryButtonClickEvent } from "./search/search-history-button-click-event";
-
-const weatherForecastColumns = document.getElementsByClassName("weatherForecastColumn") as HTMLCollectionOf<HTMLElement>;
+import { searchInput, weatherForecastColumns } from "./dom";
 
 const weatherDayCard: WeatherDayCard = createWeatherDayCard(
     document.getElementById("weatherDayCard"),
@@ -12,27 +11,27 @@ const weatherDayCard: WeatherDayCard = createWeatherDayCard(
 );
 
 const weatherForecastCard1: WeatherForecastCard = weatherForecastCard(
-    weatherForecastColumns.item(0),
+    weatherForecastColumns().item(0),
     "", "", 0, 0, 0
 );
 
 const weatherForecastCard2: WeatherForecastCard = weatherForecastCard(
-    weatherForecastColumns.item(1),
+    weatherForecastColumns().item(1),
     "", "", 0, 0, 0
 );
 
 const weatherForecastCard3: WeatherForecastCard = weatherForecastCard(
-    weatherForecastColumns.item(2),
+    weatherForecastColumns().item(2),
     "", "", 0, 0, 0
 );
 
 const weatherForecastCard4: WeatherForecastCard = weatherForecastCard(
-    weatherForecastColumns.item(3),
+    weatherForecastColumns().item(3),
     "", "", 0, 0, 0
 );
 
 const weatherForecastCard5: WeatherForecastCard = weatherForecastCard(
-    weatherForecastColumns.item(4),
+    weatherForecastColumns().item(4),
     "", "", 0, 0, 0
 );
 
@@ -60,13 +59,12 @@ searchHistoryStringArray.forEach(searchHistoryString => {
 
 searchHistoryUlElement?.appendChild(searchHistoryButtons);
 
-const searchCityInput = document.getElementById("searchInput") as HTMLInputElement;
 const citySearchHistoryUlElement = document.getElementById("citySearchHistoryList") as HTMLUListElement;
 const weatherForecastHeader = document.getElementById("forecastHeaderRow");
 
 searchForm?.addEventListener("submit", event => { searchSubmitEvent(
     event,
-    searchCityInput,
+    searchInput(),
     weatherDayCard,
     weatherForecastHeader!,
     [
