@@ -160,13 +160,13 @@ export class WeatherDayCard
 
     public show(): WeatherDayCard
     {
-        this.#htmlSectionElement.style.display = "block";
+        this.#htmlSectionElement.classList.remove("d-none");
         return this;
     }
 
     public hide(): WeatherDayCard
     {
-        this.#htmlSectionElement.style.display = "none";
+        this.#htmlSectionElement.classList.add("d-none");
         return this;
     }
 }

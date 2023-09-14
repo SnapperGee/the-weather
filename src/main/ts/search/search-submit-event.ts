@@ -127,7 +127,7 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
         }
     );
 
-    weatherForecastRow.style.display = "none";
+    weatherForecastRow.classList.add("d-none");
 
     fetchWeatherForecastData(formattedSearchQuery[0], formattedSearchQuery[1])
         .then(weatherForecast =>
@@ -162,7 +162,7 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
         }
     );
 
-    weatherForecastRow.style.display = "flex";
+    weatherForecastRow.classList.remove("d-none");
 
     document.getElementById("rootRow")?.classList.remove("justify-content-center");
     document.getElementById("weatherInfoColumn")?.classList.remove("d-none");

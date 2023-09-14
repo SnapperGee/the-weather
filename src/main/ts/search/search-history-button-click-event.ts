@@ -47,7 +47,7 @@ export const searchHistoryButtonClickEvent = ( mouseEvent: MouseEvent,
             }
         );
 
-        weatherForecastRow.style.display = "none";
+        weatherForecastRow.classList.add("d-none");
 
         fetchWeatherForecastData(formattedSearchQuery[0], formattedSearchQuery[1])
             .then(weatherForecast =>
@@ -82,7 +82,7 @@ export const searchHistoryButtonClickEvent = ( mouseEvent: MouseEvent,
             }
         );
 
-        weatherForecastRow.style.display = "flex";
+        weatherForecastRow.classList.remove("d-none");
     }
 
     document.getElementById("rootRow")?.classList.remove("justify-content-center");
