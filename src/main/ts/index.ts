@@ -6,7 +6,7 @@ import { searchHistoryButtonClickEvent } from "./search/search-history-button-cl
 import dom from "./dom";
 
 const weatherDayCard: WeatherDayCard = createWeatherDayCard(
-    document.getElementById("weatherDayCard"),
+    dom.weatherDayCard(),
     "", "", "", 0, 0, 0
 );
 

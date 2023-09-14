@@ -26,6 +26,20 @@ export function weatherInfoColumn(): HTMLDivElement
     return _weatherInfoColumn;
 }
 
+let _weatherDayCard: HTMLDivElement | null = null;
+
+export function weatherDayCard(): HTMLDivElement
+{
+    _weatherDayCard = document.getElementById("weatherDayCard") as HTMLDivElement;
+
+    if ( ! (_weatherDayCard instanceof HTMLDivElement))
+    {
+        throw new TypeError(`${weatherDayCard.name}: ${_weatherDayCard === null ? "null" : "non " + HTMLDivElement.name} weather day card.`);
+    }
+
+    return _weatherDayCard;
+}
+
 let _weatherForecastColumns: HTMLCollectionOf<HTMLElement> | null = null;
 
 export const weatherForecastColumns = (): HTMLCollectionOf<HTMLElement> =>
@@ -111,6 +125,7 @@ export function weatherForecastRow(): HTMLDivElement
 export default {
     rootRow: Object.freeze(() => rootRow()),
     weatherInfoColumn: Object.freeze(() => weatherInfoColumn()),
+    weatherDayCard: Object.freeze(() => weatherDayCard()),
     weatherForecastColumns: Object.freeze((): HTMLCollectionOf<HTMLElement> => weatherForecastColumns()),
     searchForm: Object.freeze((): HTMLFormElement => searchForm()),
     searchHistoryButtonList: Object.freeze(():HTMLUListElement => searchHistoryButtonList()),

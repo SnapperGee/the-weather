@@ -32,7 +32,7 @@
         <div class="row justify-content-center" id="rootRow">
 
             <!-- City search form and search history column -->
-            <aside class="col-md-3" id="searchCityColumn">
+            <aside class="col-md-3">
                 <!-- form for submitting -->
                 <form id="searchForm">
                     <label class="form-label fw-bold fs-4" for="searchInput">Search for a City:</label>
@@ -40,6 +40,7 @@
                     <button type="submit" class="btn btn-primary text-white w-100">Search</button>
                 </form>
                 <hr>
+                <!-- Make search history button list scrollable -->
                 <div class="overflow-y-scroll">
                     <!-- List of city search history buttons that can be clicked to search again -->
                     <ul class="list-group list-unstyled text-center gap-3" id="searchHistoryButtonList"></ul>
