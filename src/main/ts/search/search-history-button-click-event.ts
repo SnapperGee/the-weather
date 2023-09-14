@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 
 export const searchHistoryButtonClickEvent = ( mouseEvent: MouseEvent,
                                                searchFormElement: HTMLFormElement,
-                                               weatherDayCard: CurrentWeatherCard,
+                                               currentWeatherCard: CurrentWeatherCard,
                                                weatherForecastRow: HTMLDivElement,
                                                weatherForecastCards: WeatherForecastCard[] ) =>
 {
@@ -35,16 +35,16 @@ export const searchHistoryButtonClickEvent = ( mouseEvent: MouseEvent,
                 const windSpeed = currentWeather.wind.speed;
                 const humidity = currentWeather.main.humidity;
 
-                weatherDayCard.hide();
+                currentWeatherCard.hide();
 
-                weatherDayCard.cityName(cityName)
-                              .date(dt_txt)
-                              .icon(icon)
-                              .temp(temp)
-                              .windSpeed(windSpeed)
-                              .humidity(humidity);
+                currentWeatherCard.cityName(cityName)
+                                  .date(dt_txt)
+                                  .icon(icon)
+                                  .temp(temp)
+                                  .windSpeed(windSpeed)
+                                  .humidity(humidity);
 
-                weatherDayCard.show();
+                currentWeatherCard.show();
             }
         );
 
