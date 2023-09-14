@@ -21,7 +21,7 @@ dayjs.extend(tz);
  * The function that fires when the city search form is submitted. It updates the current weather and 5 day forecast
  * cards with the OpenWeatherMap API response data and makes them visible.
  *
- * @param submitEvent The event that triggered this function.
+ * @param submitEvent The submit event that triggered this function.
  *
  * @param htmlInputElement The city text input to use for the API call.
  *
@@ -29,7 +29,7 @@ dayjs.extend(tz);
  *
  * @param weatherForecastRow The row containing the weather forecast cards to hide and show.
  *
- * @param weatherForecastCards The card to update with the5 day  weather forecast API response data.
+ * @param weatherForecastCards The card to update with the day weather forecast API response data.
  *
  * @param htmlUlElement The search history buttons list to update with the city text input.
  */
