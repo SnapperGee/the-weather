@@ -3,7 +3,7 @@ import { type WeatherForecastCard, weatherForecastCard } from "./weather-forecas
 import { searchSubmitEvent } from "./search/search-submit-event";
 import { createSearchHistoryLIButton } from "./search/create-search-history-li-button";
 import { searchHistoryButtonClickEvent } from "./search/search-history-button-click-event";
-import { searchForm, searchHistoryButtonList, searchInput, weatherForecastColumns, weatherForecastRow } from "./dom";
+import dom from "./dom";
 
 const weatherDayCard: WeatherDayCard = createWeatherDayCard(
     document.getElementById("weatherDayCard"),
@@ -11,27 +11,27 @@ const weatherDayCard: WeatherDayCard = createWeatherDayCard(
 );
 
 const weatherForecastCard1: WeatherForecastCard = weatherForecastCard(
-    weatherForecastColumns().item(0),
+    dom.weatherForecastColumns().item(0),
     "", "", 0, 0, 0
 );
 
 const weatherForecastCard2: WeatherForecastCard = weatherForecastCard(
-    weatherForecastColumns().item(1),
+    dom.weatherForecastColumns().item(1),
     "", "", 0, 0, 0
 );
 
 const weatherForecastCard3: WeatherForecastCard = weatherForecastCard(
-    weatherForecastColumns().item(2),
+    dom.weatherForecastColumns().item(2),
     "", "", 0, 0, 0
 );
 
 const weatherForecastCard4: WeatherForecastCard = weatherForecastCard(
-    weatherForecastColumns().item(3),
+    dom.weatherForecastColumns().item(3),
     "", "", 0, 0, 0
 );
 
 const weatherForecastCard5: WeatherForecastCard = weatherForecastCard(
-    weatherForecastColumns().item(4),
+    dom.weatherForecastColumns().item(4),
     "", "", 0, 0, 0
 );
 
@@ -45,24 +45,24 @@ searchHistoryStringArray.forEach(searchHistoryString => {
     const searchHistoryLIButton = createSearchHistoryLIButton(searchHistoryString);
 
     searchHistoryLIButton.addEventListener("click", event => searchHistoryButtonClickEvent( event,
-                                            searchForm(),
+                                            dom.searchForm(),
                                             weatherDayCard,
-                                            weatherForecastRow(),
+                                            dom.weatherForecastRow(),
                                             [weatherForecastCard1, weatherForecastCard2, weatherForecastCard3, weatherForecastCard4, weatherForecastCard5] ))
 
     searchHistoryButtons.appendChild(searchHistoryLIButton);
 });
 
-searchHistoryButtonList().appendChild(searchHistoryButtons);
+dom.searchHistoryButtonList().appendChild(searchHistoryButtons);
 
-searchForm().addEventListener("submit", event => { searchSubmitEvent(
+dom.searchForm().addEventListener("submit", event => { searchSubmitEvent(
     event,
-    searchInput(),
+    dom.searchInput(),
     weatherDayCard,
-    weatherForecastRow(),
+    dom.weatherForecastRow(),
     [
         weatherForecastCard1, weatherForecastCard2, weatherForecastCard3,
         weatherForecastCard4, weatherForecastCard5
     ],
-    searchHistoryButtonList())
+    dom.searchHistoryButtonList())
 });

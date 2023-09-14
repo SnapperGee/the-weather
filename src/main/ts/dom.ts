@@ -79,3 +79,11 @@ export function weatherForecastRow(): HTMLDivElement
 
     return _weatherForecastRow;
 }
+
+export default {
+    weatherForecastColumns: Object.freeze((): HTMLCollectionOf<HTMLElement> => weatherForecastColumns()),
+    searchForm: Object.freeze((): HTMLFormElement => searchForm()),
+    searchHistoryButtonList: Object.freeze(():HTMLUListElement => searchHistoryButtonList()),
+    searchInput: Object.freeze((): HTMLInputElement => searchInput()),
+    weatherForecastRow: Object.freeze((): HTMLDivElement => weatherForecastRow())
+};
