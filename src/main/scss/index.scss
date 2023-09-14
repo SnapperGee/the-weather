@@ -32,6 +32,7 @@ main {
     height: calc(100% - $headerHeight);
 }
 
+// Constrain height of search history column
 aside > div {
     max-height: 30rem;
 }
