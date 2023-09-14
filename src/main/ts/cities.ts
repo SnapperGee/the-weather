@@ -1,4 +1,4 @@
-import citiesJson from "../resources/current.city.list.json";
+import citiesJson from "../resource/current.city.list.json";
 import { API_KEY } from "./env";
 import { CurrentWeatherAPIResponse, type WeatherForecastAPIResponse } from "./weather-forecast-api-response";
 
