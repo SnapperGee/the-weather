@@ -2,7 +2,7 @@
  * @module search-submit-event
  */
 
-import { fetchCurrentWeatherData, fetchWeatherForecastData as fetchWeatherForecastData, isRecognizedCityName, isRecognizedCountryName } from "../cities";
+import { fetchCurrentWeatherData, fetchWeatherForecastData as fetchWeatherForecastData, isRecognizedCityAndCountryName, isRecognizedCityName, isRecognizedCountryName } from "../cities";
 import { Icon, convertKelvinToFahrenheit, createOpenWeatherMapIconSrc, formatDateString } from "../util";
 import { CurrentWeatherCard } from "../current-weather-card";
 import { WeatherForecastCard } from "../weather-forecast-card";
@@ -79,6 +79,12 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
     if ( ! isRecognizedCountryName(formattedSearchQuery[1]))
     {
         alert(`Unrecognized country name: "${formattedSearchQuery[1]}"`);
+        return;
+    }
+
+    if ( ! isRecognizedCityAndCountryName(formattedSearchQuery[0], formattedSearchQuery[1]))
+    {
+        alert(`The following city and country name combination isn't recognized: "${formattedSearchQuery[0], formattedSearchQuery[1]}"`);
         return;
     }
 

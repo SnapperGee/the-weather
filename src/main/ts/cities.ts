@@ -23,6 +23,8 @@ export const isRecognizedCityName = (aString: string): boolean => cityNames.has(
 
 export const isRecognizedCountryName = (aString: string): boolean => countryNames.has(aString.toUpperCase());
 
+export const isRecognizedCityAndCountryName = (cityName: string, countryName: string) => cities.some(city => cityName.localeCompare(city.name, undefined, {sensitivity: "base"}) === 0 && countryName.localeCompare(city.country, undefined, {sensitivity: "base"}) === 0);
+
 function getCity(name: string, country: string): City | undefined
 {
     if (isRecognizedCityName(name) && isRecognizedCountryName(country))
