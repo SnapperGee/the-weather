@@ -42,4 +42,8 @@ There are 4 different types of reasons input might be invalid:
 
    ![invalid city name alert](./docs/countryname_alert.png)
 
+1. The input contains a city and country name combination that isn't recognized:
+
+   ![invalid city/country name combo alert](./docs/city_country_name_alert.png)
+
 1. Empty/blank input is also invalid, however this doesn't cause an alert box to appear.
