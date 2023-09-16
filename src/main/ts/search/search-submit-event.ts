@@ -84,7 +84,7 @@ export const searchSubmitEvent = ( submitEvent: SubmitEvent,
 
     if ( ! isRecognizedCityAndCountryName(formattedSearchQuery[0], formattedSearchQuery[1]))
     {
-        alert(`The following city and country name combination isn't recognized: "${formattedSearchQuery[0], formattedSearchQuery[1]}"`);
+        alert(`The following city and country name combination isn't recognized: "${formattedSearchQuery[0]}, ${formattedSearchQuery[1]}"`);
         return;
     }
 
