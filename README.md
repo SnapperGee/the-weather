@@ -4,9 +4,9 @@ Weather app to look up the weather conditions by city.
 
 ## Use
 
-A city name and country delineated by a comma, for instance `San Francisco, US`, is used to get the current and 5 day
-weather forecast for that city. If the city or country name isn't recognized or the inputted format isn't correct, then
-an alert is displayed highlighting the problem.
+A city name and country, delineated by a comma (for instance, `San Francisco, US`), are used to get the current and 5 day
+weather forecast for that city. If the city or country name isn't recognized, or if the format of the input is incorrect,
+then an alert is displayed highlighting the problem.
 
 Up to 20 searches are saved in the history and can easily be recalled.
 
@@ -40,10 +40,11 @@ There are 4 different types of reasons input might be invalid:
 
 1. The input contains a country name that isn't recognized:
 
-   ![invalid city name alert](./docs/countryname_alert.png)
+   ![invalid country name alert](./docs/countryname_alert.png)
 
 1. The input contains a city and country name combination that isn't recognized:
 
    ![invalid city/country name combo alert](./docs/city_country_name_alert.png)
+---
 
-1. Empty/blank input is also invalid, however this doesn't cause an alert box to appear.
+- Empty/blank input is also invalid, however this doesn't cause an alert box to appear.
